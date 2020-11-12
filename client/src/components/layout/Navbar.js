@@ -9,7 +9,7 @@ const Navbar = () => {
           <Link to="/"><i className="fas fa-briefcase"></i> FindJob</Link>
         </h1>
         <ul>
-          <li><a href="profiles.html">Twoi potencjalni pracodwacy</a></li>
+          <li><a href="profiles.html">Twoi potencjalni pracodawcy</a></li>
           <li><Link to="/register">Rejestracja</Link></li>
           <li><Link to="/login">Logowanie</Link></li>
         </ul>
