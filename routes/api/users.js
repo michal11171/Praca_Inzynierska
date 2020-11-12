@@ -12,11 +12,11 @@ const  User = require('../../models/User');
 // @desc    Register user
 // @access  Public
 router.post('/', [
-    check('name', 'Name is required')
+    check('name', 'Imię jest wymagane')
     .not()
     .isEmpty(),
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please insert the password with 6 or more characters').isLength({min: 6})
+    check('email', 'Wprowadź poprawny email').isEmail(),
+    check('password', 'Hasło musi mieć minimum 6 znaków').isLength({min: 6})
 ] ,
 async (req, res) => {
     const errors = validationResult(req);
@@ -32,7 +32,7 @@ try {
     let user = await User.findOne({ email});
 
     if(user){
-       return res.status(400).json({errors: [ { msg: 'User already exist' } ]});
+       return res.status(400).json({errors: [ { msg: 'Ten adres email jest już zarejestrowany' } ]});
     }
 
     const avatar = gravatar.url(email, {
