@@ -8,7 +8,7 @@ const Landing = () => {
         <div className="landing-inner">
           <h1 className="x-large">Nie siedź bezczynnie</h1>
           <p className="lead">
-            Załóż konto i znajdź pracę, która Cię zainteresuje.
+            Załóż konto i znajdź interesującą pracę
           </p>
           <div className="buttons">
             <Link to="/register" className="btn btn-primary">Zarejestruj się</Link>
