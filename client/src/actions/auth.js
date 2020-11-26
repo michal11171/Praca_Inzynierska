@@ -6,7 +6,8 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    CLEAR_PROFILE
 } from './types';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
@@ -14,7 +15,7 @@ import setAuthToken from '../utils/setAuthToken';
 
 //Load User
 export const loadUser = () => async dispatch => {
-    if(localStorage.token){
+    if (localStorage.token) {
         setAuthToken(localStorage.token);
     }
 
@@ -35,14 +36,14 @@ export const loadUser = () => async dispatch => {
 
 
 //Register User
-export const register = ({name, email, password}) => async dispatch => {
+export const register = ({ name, email, password }) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({name, email, password});
+    const body = JSON.stringify({ name, email, password });
 
     try {
         const res = await axios.post('/api/users', body, config);
@@ -54,7 +55,7 @@ export const register = ({name, email, password}) => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
 
-        if(errors){
+        if (errors) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
 
@@ -73,7 +74,7 @@ export const login = (email, password) => async dispatch => {
         }
     }
 
-    const body = JSON.stringify({email, password});
+    const body = JSON.stringify({ email, password });
 
     try {
         const res = await axios.post('/api/auth', body, config);
@@ -86,7 +87,7 @@ export const login = (email, password) => async dispatch => {
     } catch (err) {
         const errors = err.response.data.errors;
 
-        if(errors){
+        if (errors) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
 
@@ -99,5 +100,7 @@ export const login = (email, password) => async dispatch => {
 
 //LOGOUT
 export const logout = () => dispatch => {
-    dispatch({type: LOGOUT});
+    dispatch({ type: CLEAR_PROFILE });
+    dispatch({ type: LOGOUT });
+
 };
