@@ -7,7 +7,7 @@ export const DashboardActions = () => {
             <Link to="/edit-profile" class="btn btn-light"
             ><i class="fas fa-user-circle text-primary"></i> Edytuj profil</Link>
             <Link to="/add-experience" class="btn btn-light"
-            ><i class="fab fa-black-tie text-primary"></i> Dodaj miejsca poprzedniej pracy</Link>
+            ><i class="fab fa-black-tie text-primary"></i> Dodaj wcześniejsze miejsca pracy</Link>
         </div>
     )
 }
