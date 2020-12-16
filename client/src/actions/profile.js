@@ -153,12 +153,11 @@ export const deleteExperience = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
     if (window.confirm('Jesteś pewien? Twoje konto nie będzie mogło zostać przywrócone.')) {
         try {
-            const res = await axios.delete(`api/profile`);
+            await axios.delete(`api/profile`);
 
-            dispatch({
-                type: CLEAR_PROFILE,
-                type: ACCOUNT_DELETED
-            });
+            dispatch({ type: CLEAR_PROFILE });
+            dispatch({ type: ACCOUNT_DELETED });
+
             dispatch(setAlert('Twoje konto zostało usunięte', 'success'));
         } catch (err) {
             dispatch({
