@@ -29,7 +29,7 @@ const Profile = ({ getProfileById, profile: {
                 <div class="profile-grid my-1">
                     <ProfileTop profile={profile} />
                     <ProfileAbout profile={profile} />
-                    <div className="profile-exp2 bg-white p-2">
+                    <div className="profile-exp bg-white p-2">
                         <h2 className="text-primary">Doświadczenie</h2>
                         {profile.experience.length > 0 ? (<Fragment>
                             {profile.experience.map(experience => (

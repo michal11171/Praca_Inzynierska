@@ -488,6 +488,12 @@ button {
   margin-bottom: 0.5rem;
 }
 
+.postloc {
+  color: #555;
+  font-size: 90%;
+  font-weight: 150%;
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {

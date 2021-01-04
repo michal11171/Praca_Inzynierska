@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const PostItem = ({ addLike, removeLike, deletePost, auth,
-    post: { _id, text, name, avatar, user, likes, comments, date },
+    post: { _id, text, name, avatar, user, likes, comments, date, location },
     showActions }) => (
     <div class="post bg-white p-1 my-1">
         <div>
@@ -17,15 +17,16 @@ const PostItem = ({ addLike, removeLike, deletePost, auth,
                     alt=""
                 />
                 <h4>{name}</h4>
+
             </Link>
         </div>
         <div>
             <p class="my-1">
                 {text}
             </p>
-            <p class="post-date">
-                Dodano <Moment format='DD/MM/YYYY'>{date}</Moment>
-            </p>
+            <p className="postloc">Lokalizacja: {location}</p>
+            <p class="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
+
 
             {showActions && (<Fragment>
                 <button onClick={e => addLike(_id)} type="button" class="btn btn-light">
