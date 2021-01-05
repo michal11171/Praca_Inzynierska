@@ -6,20 +6,21 @@ import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
-import { getProfileById } from '../../actions/profile';
+import { getProfileById, addLikeP, removeLikeP } from '../../actions/profile';
+import ProfileComments from './ProfileComments';
+import ProfileCommentsForm from './ProfileCommentsForm';
 
-const Profile = ({ getProfileById, profile: {
-    profile,
-    loading,
-}, auth, match }) => {
+const Profile = ({ addLikeP, removeLikeP, getProfileById,
+    profile: { profile, loading, _id, likes },
+    auth, match }) => {
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
 
 
     return (
-        <Fragment>
-            {profile === null || loading ? <Spinner /> : <Fragment>
+        <Fragment Fragment >
+            { profile === null || loading ? <Spinner /> : <Fragment>
                 <Link to='/profiles' className='btn btn-ligth'>
                     Przeglądaj wszystkie profile
                 </Link>
@@ -38,6 +39,26 @@ const Profile = ({ getProfileById, profile: {
                         </Fragment>) : (<h4> Nie podano informacji o poprzednich miejscach pracy. </h4>)}
                     </div>
                 </div>
+
+                {(<Fragment>
+                    <button onClick={e => addLikeP(_id)} type="button" class="btn btn-light">
+                        <i class="fas fa-thumbs-up"></i> {' '}
+                        {likes.length > 0 && (
+                            <span>{likes.length}</span>
+                        )}
+                    </button>
+                    <button onClick={e => removeLikeP(_id)} type="button" class="btn btn-light">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                    {/* <span>{likes.length}</span> */}
+                </Fragment>)}
+
+                <ProfileCommentsForm profileId={profile._id} />
+                <div className="comments">
+                    {profile.comments.map(comment => (
+                        <ProfileComments key={comment._id} comment={comment} profileId={profile._id} />
+                    ))}
+                </div>
             </Fragment>}
         </Fragment >
     )
@@ -54,4 +75,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileById })(Profile)
+export default connect(mapStateToProps, { addLikeP, removeLikeP, getProfileById })(Profile)

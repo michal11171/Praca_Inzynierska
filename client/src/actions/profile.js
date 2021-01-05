@@ -7,7 +7,11 @@ import {
     PROFILE_ERROR,
     UPDATE_PROFILE,
     ACCOUNT_DELETED,
-    GET_PROFILES
+    GET_PROFILES,
+    ADD_COMMENTP,
+    POST_ERROR,
+    REMOVE_COMMENTP,
+    UPDATE_LIKESC
 } from './types';
 
 //Get current users profile
@@ -167,4 +171,79 @@ export const deleteAccount = () => async dispatch => {
         }
     }
 
+};
+
+//Add comment
+export const addComment = (profileId, formData) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const res = await axios.post(`/api/profile/commentP/${profileId}`, formData, config);
+
+        dispatch({
+            type: ADD_COMMENTP,
+            payload: res.data
+        });
+        dispatch(setAlert('Pomyślnie dodano opinie', 'success'));
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+//Delete comment
+export const deleteComment = (profileId, commentId) => async dispatch => {
+
+    try {
+        const res = await axios.delete(`/api/profile/commentP/${profileId}/${commentId}`);
+
+        dispatch({
+            type: REMOVE_COMMENTP,
+            payload: commentId
+        });
+        dispatch(setAlert('Pomyślnie usunięto komentarz', 'success'));
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+//Add like
+export const addLikeP = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/profile/like/${id}`);
+
+        dispatch({
+            type: UPDATE_LIKESC,
+            payload: { id, likes: res.data }
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+//Remove like
+export const removeLikeP = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/profile/unlike/${id}`);
+
+        dispatch({
+            type: UPDATE_LIKESC,
+            payload: { id, likes: res.data }
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
 };

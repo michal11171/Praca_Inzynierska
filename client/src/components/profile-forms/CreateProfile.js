@@ -53,9 +53,7 @@ const CreateProfile = ({ createProfile, history }) => {
                         <option value="Bezrobotny">Bezrobotny</option>
                         <option value="Inne">Inne</option>
                     </select>
-                    <small className="form-text"
-                    >Poinformuj potencjalnego pracodawcę o swoim statusie</small
-                    >
+                    <small className="form-text" >Poinformuj potencjalnego pracodawcę o swoim statusie</small>
                 </div>
                 <div className="form-group">
                     <input type="text" placeholder="Miasto" name="location" value={location} onChange={e => onChange(e)} />

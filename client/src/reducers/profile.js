@@ -1,4 +1,4 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES, UPDATE_LIKESC, ADD_COMMENTP, REMOVE_COMMENTP } from "../actions/types";
 
 const initialState = {
     profile: null,
@@ -31,12 +31,35 @@ export default function (state = initialState, action) {
                 loading: false,
                 profile: null
             };
+        case ADD_COMMENTP:
+            return {
+                ...state,
+                profile: { ...state.profile, comments: payload },
+                loading: false
+            };
+        case REMOVE_COMMENTP:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    comments: state.profile.comments.filter(
+                        comment => comment._id !== payload
+                    )
+                },
+                loading: false
+            };
         case CLEAR_PROFILE:
             return {
                 ...state,
                 profile: null,
                 loading: false
             }
+        case UPDATE_LIKESC:
+            return {
+                ...state,
+                profile: state.profile.map(profile => profile._id === payload.id ? { ...profile, likes: payload.likes } : profile),
+                loading: false
+            };
         default:
             return state;
     }

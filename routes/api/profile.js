@@ -225,6 +225,116 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
-})
+});
+// @route   POST api/profile/commentP/:id
+// @desc    Comment on a post
+// @access  Private
+router.post('/commentP/:id', [auth, [
+    check('text', 'Text is required')
+        .not()
+        .isEmpty()
+]],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        try {
+            const user = await User.findById(req.user.id).select('-password');
+            const profile = await Profile.findById(req.params.id);
+
+            const newCommentP = {
+                text: req.body.text,
+                name: user.name,
+                avatar: user.avatar,
+                user: req.user.id
+            };
+
+            profile.comments.unshift(newCommentP);
+
+            await profile.save();
+
+            res.json(profile.comments);
+
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+
+    });
+// @route   DELETE api/profile/commentP/:id/:comment_id
+// @desc    Delete comment
+// @access  Private
+router.delete('/commentP/:id/:comment_id', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findById(req.params.id);
+
+        // Pull out comment
+        const comment = profile.comments.find(comment => comment.id === req.params.comment_id);
+        //Make sure comment exist
+        if (!comment) {
+            return res.status(404).json({ msg: 'Comment does not exist' });
+        }
+
+        //Check if user is author of the comment
+        if (comment.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+        //Get remove index
+        const removeIndex = profile.comments.map(comment => comment.user.toString()).indexOf(req.user.id);
+        profile.comments.splice(removeIndex, 1);
+
+        await profile.save();
+        res.json(profile.comments);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+// @route   PUT api/profile/like/:id
+// @desc    Like a profile
+// @access  Private
+router.put('/like/:id', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findById(req.params.id);
+        //Check if profile has already been liked  
+        if (profile.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+            return res.status(400).json({ msg: 'Profile already liked' });
+        }
+        profile.likes.unshift({ user: req.user.id });
+
+        await profile.save();
+        res.json(profile.likes);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   PUT api/profile/unlike/:id
+// @desc    Unlike a profile
+// @access  Private
+router.put('/unlike/:id', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findById(req.params.id);
+        //Check if post has already been liked  
+        if (profile.likes.filter(like => like.user.toString() === req.user.id).length == 0) {
+            return res.status(400).json({ msg: 'Profile has not yet been liked' });
+        }
+
+        // Get remove index
+        const removeIndex = profile.likes.map(like => like.user.toString()).indexOf(req.user.id);
+        profile.likes.splice(removeIndex, 1);
+
+        await profile.save();
+        res.json(profile.likes);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router;
