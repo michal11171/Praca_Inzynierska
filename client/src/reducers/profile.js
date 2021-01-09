@@ -54,10 +54,16 @@ export default function (state = initialState, action) {
                 profile: null,
                 loading: false
             }
+        // case UPDATE_LIKESC:
+        //     return {
+        //         ...state,
+        //         profiles: state.profiles.map(profile => profile._id === payload.id ? { ...profile, likes: payload.likes } : profile),
+        //         loading: false
+        //     };
         case UPDATE_LIKESC:
             return {
                 ...state,
-                profile: state.profile.map(profile => profile._id === payload.id ? { ...profile, likes: payload.likes } : profile),
+                profile: { ...state.profile, likes: payload.likes },
                 loading: false
             };
         default:

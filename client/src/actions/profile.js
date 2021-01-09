@@ -217,7 +217,7 @@ export const deleteComment = (profileId, commentId) => async dispatch => {
 //Add like
 export const addLikeP = id => async dispatch => {
     try {
-        const res = await axios.put(`api/profile/like/${id}`);
+        const res = await axios.put(`/api/profile/like/${id}`);
 
         dispatch({
             type: UPDATE_LIKESC,
@@ -234,7 +234,7 @@ export const addLikeP = id => async dispatch => {
 //Remove like
 export const removeLikeP = id => async dispatch => {
     try {
-        const res = await axios.put(`api/profile/unlike/${id}`);
+        const res = await axios.put(`/api/profile/unlike/${id}`);
 
         dispatch({
             type: UPDATE_LIKESC,

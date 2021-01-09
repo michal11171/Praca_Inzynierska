@@ -41,18 +41,22 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 </div>
 
                 {(<Fragment>
-                    <button onClick={e => addLikeP(_id)} type="button" class="btn btn-light">
+                    Czy polecasz tego użytkownika?
+                    <button onClick={e => addLikeP(profile._id)} type="button" class="btn btn-light">
+
                         <i class="fas fa-thumbs-up"></i> {' '}
-                        {likes.length > 0 && (
-                            <span>{likes.length}</span>
+                        {profile.likes.length > 0 && (
+                            <span>{profile.likes.length}</span>
                         )}
+
                     </button>
-                    <button onClick={e => removeLikeP(_id)} type="button" class="btn btn-light">
+                    <button onClick={e => removeLikeP(profile._id)} type="button" class="btn btn-light">
                         <i class="fas fa-thumbs-down"></i>
                     </button>
-                    {/* <span>{likes.length}</span> */}
-                </Fragment>)}
 
+                </Fragment>)}
+                <br></br>
+                <br></br>
                 <ProfileCommentsForm profileId={profile._id} />
                 <div className="comments">
                     {profile.comments.map(comment => (
@@ -67,7 +71,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
 Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    addLikeP: PropTypes.func.isRequired,
+    removeLikeP: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
