@@ -6,14 +6,14 @@ import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
 import { post } from 'request';
 
-const Posts = ({ getPosts, post: { posts } }) => {
+const PostsO = ({ getPosts, post: { posts } }) => {
     useEffect(() => {
         getPosts();
     }, [getPosts]);
     const Posty = (posts)
     const arryayPosts = Object.values(Posty);
     console.log(arryayPosts);
-    const result = arryayPosts.filter(post => post.types === "praca");
+    const result = arryayPosts.filter(post => post.types === "usluga");
     console.log(result);
     return (
 
@@ -36,7 +36,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
 
 
 
-Posts.propTypes = {
+PostsO.propTypes = {
     getPosts: PropTypes.func.isRequired,
     post: PropTypes.object.isRequired
 };
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
     post: state.post
 });
 
-export default connect(mapStateToProps, { getPosts })(Posts);
+export default connect(mapStateToProps, { getPosts })(PostsO);

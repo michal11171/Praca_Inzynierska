@@ -17,7 +17,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
       <li>
         <Link to="/posts">
-          Ogłoszenia
+          Oferty pracy
+        </Link>
+      </li>
+      <li>
+        <Link to="/postsO">
+          Oferty usług
         </Link>
       </li>
       <li>

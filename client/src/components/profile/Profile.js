@@ -41,7 +41,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 </div>
 
                 {(<Fragment>
-                    Czy polecasz tego użytkownika?
+                    <a className="likeuser">Czy ten użytkownik Ci pomógł?</a>
                     <button onClick={e => addLikeP(profile._id)} type="button" class="btn btn-light">
 
                         <i class="fas fa-thumbs-up"></i> {' '}
