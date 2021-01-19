@@ -32,12 +32,14 @@ const PostForm = ({ addPost }) => {
                     <option value="praca">Szukam/oferuję pracę dorywczą</option>
                     <option value="usluga">Oferuję usługę</option>
                 </select>
-                <input type="text" placeholder="Podaj Tytuł" name="title" value={title} onChange={e => onChange(e)} />
+                <br></br>
+                <input type="text" placeholder="Podaj tytuł" name="title" value={title} onChange={e => onChange(e)} />
+                <br></br>
                 <textarea
                     name="text"
                     cols="30"
                     rows="5"
-                    placeholder="Opisz czego dotyczy twój wpis"
+                    placeholder="Opisz czego dotyczy twoje ogłoszenie"
                     value={text}
                     onChange={e => onChange(e)}
                     required

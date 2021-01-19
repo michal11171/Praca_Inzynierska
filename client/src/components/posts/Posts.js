@@ -15,6 +15,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
     console.log(arryayPosts);
     const result = arryayPosts.filter(post => post.types === "praca");
     console.log(result);
+
     return (
 
         <Fragment>
@@ -25,11 +26,14 @@ const Posts = ({ getPosts, post: { posts } }) => {
 
             <PostForm />
 
+
+
             <div className="posts">
                 {result.map((post) => (
                     <PostItem key={post._id} post={post} />
                 ))}
             </div>
+
         </Fragment>
     );
 };

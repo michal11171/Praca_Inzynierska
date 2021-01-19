@@ -24,4 +24,5 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENTP = 'ADD_COMMENTP';
 export const REMOVE_COMMENTP = 'REMOVE_COMMENTP';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+export const FILTER_BY_VALUE = 'FILTER_BY_VALUE';
 

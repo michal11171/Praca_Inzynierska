@@ -8,7 +8,8 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    FILTER_BY_VALUE
 } from './types';
 
 //Get posts
@@ -163,3 +164,9 @@ export const deleteComment = (postId, commentId) => async dispatch => {
         });
     }
 };
+
+//Filter by location
+export const filterByValue = payload => ({
+    type: FILTER_BY_VALUE,
+    payload
+});

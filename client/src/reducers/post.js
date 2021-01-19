@@ -6,7 +6,8 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    FILTER_BY_VALUE
 } from '../actions/types';
 
 const initialState = {

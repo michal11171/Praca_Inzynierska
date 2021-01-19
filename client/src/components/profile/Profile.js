@@ -9,6 +9,11 @@ import ProfileExperience from './ProfileExperience';
 import { getProfileById, addLikeP, removeLikeP } from '../../actions/profile';
 import ProfileComments from './ProfileComments';
 import ProfileCommentsForm from './ProfileCommentsForm';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { service } from 'google-maps';
+import axios from 'axios';
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 const Profile = ({ addLikeP, removeLikeP, getProfileById,
     profile: { profile, loading, _id, likes },
@@ -17,6 +22,27 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
 
+
+
+
+
+
+    const libraries = ["places"];
+    const mapContainerStyle = {
+        width: "50vw",
+        height: "50vh"
+    }
+    const center = {
+        lat: 43.55,
+        lng: -79.38
+
+    }
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: "AIzaSyAG9KkDxqCHEaLULRxKbpPqoPhe8w3TYak",
+        libraries
+    });
+    if (loadError) return "Error loading maps";
+    if (!isLoaded) return "Loading Maps";
 
     return (
         <Fragment Fragment >
@@ -27,6 +53,17 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 {auth.isAuthenticated && auth.loading === false &&
                     auth.user._id === profile.user._id &&
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
+
+                <div>
+                    <GoogleMap
+                        mapContainerStyle={mapContainerStyle}
+                        zoom={8}
+                        center={center}
+
+                    ></GoogleMap>
+                </div>
+
+
                 <div class="profile-grid my-1">
                     <ProfileTop profile={profile} />
                     <ProfileAbout profile={profile} />
