@@ -10,7 +10,8 @@ import { getProfileById, addLikeP, removeLikeP } from '../../actions/profile';
 import ProfileComments from './ProfileComments';
 import ProfileCommentsForm from './ProfileCommentsForm';
 import Geocode from 'react-geocode';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { googleMap, MarkerOptions } from 'react-google-maps';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
@@ -40,6 +41,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
     const [lat, setLat] = useState('');
     const [lng, setLng] = useState('');
 
+    const [markers, setMarkers] = useState([]);
 
     const libraries = ["places"];
     const mapContainerStyle = {
@@ -52,6 +54,13 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
         lng: lng
 
     }
+    const locationsMarker = [
+        {
+            location: {
+                lat: lat,
+                lng: lng
+            }
+        }];
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAG9KkDxqCHEaLULRxKbpPqoPhe8w3TYak",
         libraries
@@ -62,6 +71,8 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
         mapRef.current = map;
     }, []);
 
+
+    console.log("TEEEEEEEEEEEEEST:", locationsMarker);
     const moveTo = React.useCallback(({ lat, lng }) => {
         mapRef.current.moveTo({ lat, lng });
         mapRef.current.setZoom(14);
@@ -110,6 +121,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     const profloc = profile.location;
                     console.log("BBB:", profloc);
                     try {
+
                         const xd = await Geocode.fromAddress(profloc).then(
                             response => {
                                 const { lat, lng } = response.results[0].geometry.location;
@@ -117,17 +129,20 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                                 setLat(lat);
                                 setLng(lng);
 
+
+
                             },
                             error => {
                                 console.error(error);
                             }
                         );
 
-
                     } catch (error) {
                         console.log("😱 Error: ", error);
                     }
                     dispatch({ type: 'OPEN_MODAL' })
+
+
 
                 }} >Pokaż lokalizację</Button>
 
@@ -141,11 +156,20 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     <Modal.Content>
 
                         <GoogleMap
+
                             mapContainerStyle={mapContainerStyle}
-                            zoom={14}
+                            zoom={18}
                             center={center}
 
-                        ></GoogleMap>
+                        >
+                            {
+                                locationsMarker.map(item => {
+                                    return (
+                                        <Marker key={item.name} position={item.location} />
+                                    )
+                                })
+                            }
+                        </GoogleMap>
 
                     </Modal.Content>
                     <Modal.Actions>
