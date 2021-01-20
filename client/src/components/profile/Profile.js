@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -9,22 +9,36 @@ import ProfileExperience from './ProfileExperience';
 import { getProfileById, addLikeP, removeLikeP } from '../../actions/profile';
 import ProfileComments from './ProfileComments';
 import ProfileCommentsForm from './ProfileCommentsForm';
+import Geocode from 'react-geocode';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { service } from 'google-maps';
-import axios from 'axios';
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+} from "use-places-autocomplete";
+import {
+    Combobox,
+    ComboboxInput,
+    ComboboxPopover,
+    ComboboxList,
+    ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
+import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
+
 const Profile = ({ addLikeP, removeLikeP, getProfileById,
-    profile: { profile, loading, _id, likes },
+    profile: { profile, loading, _id, likes, location },
     auth, match }) => {
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
 
 
-
-
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
 
 
     const libraries = ["places"];
@@ -32,17 +46,124 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
         width: "50vw",
         height: "50vh"
     }
+    console.log("DZIALA?", lat, lng)
     const center = {
-        lat: 43.55,
-        lng: -79.38
+        lat: lat,
+        lng: lng
 
     }
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: "AIzaSyAG9KkDxqCHEaLULRxKbpPqoPhe8w3TYak",
         libraries
     });
+    Geocode.setApiKey("AIzaSyAG9KkDxqCHEaLULRxKbpPqoPhe8w3TYak");
+    const mapRef = React.useRef();
+    const onMapLoad = React.useCallback((map) => {
+        mapRef.current = map;
+    }, []);
+
+    const moveTo = React.useCallback(({ lat, lng }) => {
+        mapRef.current.moveTo({ lat, lng });
+        mapRef.current.setZoom(14);
+    }, []);
+
     if (loadError) return "Error loading maps";
     if (!isLoaded) return "Loading Maps";
+    //const lokalizacja = profile.location;
+    //console.log("Lokalizacja:", profile.location);
+
+    function exampleReducer(state, action) {
+        switch (action.type) {
+            case 'OPEN_MODAL':
+                return { open: true, dimmer: action.dimmer }
+            case 'CLOSE_MODAL':
+                return { open: false }
+            default:
+                throw new Error()
+        }
+    }
+
+
+    function Search({ moveTo }) {
+        const [state, dispatch] = React.useReducer(exampleReducer, {
+            open: false,
+            dimmer: undefined,
+        })
+        const { open, dimmer } = state
+        const {
+            ready,
+            value,
+            suggestions: { status, data },
+            setValue,
+            clearSuggestions,
+        } = usePlacesAutocomplete({
+            requestOptions: {
+                location: { lat: () => 43.6532, lng: () => -79.3832 },
+                radius: 100 * 1000,
+            },
+        });
+        return (
+            <div className="searchbtn">
+
+
+                <Button onClick={async (address) => {
+                    const profloc = profile.location;
+                    console.log("BBB:", profloc);
+                    try {
+                        const xd = await Geocode.fromAddress(profloc).then(
+                            response => {
+                                const { lat, lng } = response.results[0].geometry.location;
+                                console.log("POP:", lat, lng);
+                                setLat(lat);
+                                setLng(lng);
+
+                            },
+                            error => {
+                                console.error(error);
+                            }
+                        );
+
+
+                    } catch (error) {
+                        console.log("😱 Error: ", error);
+                    }
+                    dispatch({ type: 'OPEN_MODAL' })
+
+                }} >Pokaż lokalizację</Button>
+
+
+                <Modal
+                    dimmer={dimmer}
+                    open={open}
+                    onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
+                >
+                    <Modal.Header>Lokalizacja</Modal.Header>
+                    <Modal.Content>
+
+                        <GoogleMap
+                            mapContainerStyle={mapContainerStyle}
+                            zoom={14}
+                            center={center}
+
+                        ></GoogleMap>
+
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button negative onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
+                            Disagree
+          </Button>
+                        <Button positive onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
+                            Agree
+          </Button>
+                    </Modal.Actions>
+                </Modal>
+
+
+            </div>
+        );
+
+    }
+
 
     return (
         <Fragment Fragment >
@@ -55,12 +176,14 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
 
                 <div>
-                    <GoogleMap
+
+                    <Search moveTo={moveTo} />
+                    {/* <GoogleMap
                         mapContainerStyle={mapContainerStyle}
-                        zoom={8}
+                        zoom={14}
                         center={center}
 
-                    ></GoogleMap>
+                    ></GoogleMap> */}
                 </div>
 
 

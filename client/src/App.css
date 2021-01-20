@@ -41,6 +41,9 @@ img {
   color: #343a40;
   margin-right: 20px;
 }
+.searchbtn {
+  margin-top: 20px;
+}
 #map {
   height: 500px;
   width: 50%;

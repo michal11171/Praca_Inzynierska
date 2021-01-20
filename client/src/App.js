@@ -20,6 +20,7 @@ import Profile from './components/profile/Profile';
 import Post from './components/post/Post';
 import Posts from './components/posts/Posts';
 import PostsO from './components/posts/PostsO';
+import 'semantic-ui-css/semantic.min.css'
 
 
 if (localStorage.token) {
