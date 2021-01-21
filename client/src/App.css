@@ -48,6 +48,18 @@ img {
   height: 500px;
   width: 50%;
 }
+.filtr {
+  height: 40px;
+}
+.filtrdiv {
+  width: 30%;
+}
+.commentloc {
+  color: #555;
+  font-size: 115%;
+  font-weight: 150%;
+  margin-top: 5px;
+}
 /* Utilities */
 .container {
   max-width: 1100px;

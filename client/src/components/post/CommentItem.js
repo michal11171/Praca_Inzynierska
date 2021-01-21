@@ -7,7 +7,7 @@ import { deleteComment } from '../../actions/post';
 
 const CommentItem = ({
     postId,
-    comment: { _id, text, name, avatar, user, date },
+    comment: { _id, text, name, avatar, user, date, location },
     auth,
     deleteComment
 }) => (
@@ -28,6 +28,7 @@ const CommentItem = ({
             </p>
             <p class="post-date">
                 Dodano <Moment format='DD/MM/YYYY'>{date}</Moment>
+                <p className="commentloc">Lokalizacja: {location}</p>
             </p>
             {!auth.loading && user === auth.user._id && (
                 <button onClick={e => deleteComment(postId, _id)} type='button' className='btn btn-danger'>

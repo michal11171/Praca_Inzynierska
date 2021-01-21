@@ -45,7 +45,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
 
     const libraries = ["places"];
     const mapContainerStyle = {
-        width: "50vw",
+        width: "47vw",
         height: "50vh"
     }
     console.log("DZIALA?", lat, lng)
