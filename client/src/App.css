@@ -54,6 +54,12 @@ img {
 .filtrdiv {
   width: 30%;
 }
+.errpost {
+  font-size: 130%;
+  padding-top: 10px;
+  color: red;
+  font-weight: 700;
+}
 .commentloc {
   color: #555;
   font-size: 115%;

@@ -10,6 +10,7 @@ const PostForm = ({ addPost }) => {
         title: '',
         typeOS: ''
     });
+    const [er, setEr] = useState('');
     const { text, types, title, typeOS } = formData;
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     return (
@@ -19,7 +20,7 @@ const PostForm = ({ addPost }) => {
             </div>
             <form class="form my-1" onSubmit={e => {
                 e.preventDefault();
-                addPost({ text, types, title, typeOS });
+                if (types !== '' && typeOS !== '') { addPost({ text, types, title, typeOS }); setEr(''); } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
                 setFormData({
                     text: '',
                     types: '',
@@ -29,19 +30,19 @@ const PostForm = ({ addPost }) => {
 
 
             }}>
-                <select name="types" placeholder="typ pracy" value={types} onChange={e => onChange(e)}>
+                <select name="types" placeholder="typ pracy" value={types} onChange={e => onChange(e)} >
                     <option value="0">* Wybierz czego dotyczy twoje ogłoszenie</option>
                     <option value="praca">Praca</option>
                     <option value="usluga">Usługa</option>
                 </select>
                 <br></br>
-                <select name="typeOS" placeholder="szukam/oferuje" value={typeOS} onChange={e => onChange(e)}>
+                <select name="typeOS" placeholder="szukam/oferuje" value={typeOS} onChange={e => onChange(e)} >
                     <option value="0">* Wybierz rodzaj ogłoszenia</option>
                     <option value="szukam">Szukam</option>
                     <option value="oferuje">Oferuję</option>
                 </select>
                 <br></br>
-                <input type="text" placeholder="Podaj tytuł" name="title" value={title} onChange={e => onChange(e)} />
+                <input type="text" placeholder="Podaj tytuł" name="title" value={title} onChange={e => onChange(e)} required />
                 <br></br>
                 <textarea
                     name="text"
@@ -52,7 +53,11 @@ const PostForm = ({ addPost }) => {
                     onChange={e => onChange(e)}
                     required
                 ></textarea>
+                <div className="errpost">
+                    {er}
+                </div>
                 <input type="submit" class="btn btn-dark my-1" value="Dodaj" />
+
             </form>
         </div>
     );
