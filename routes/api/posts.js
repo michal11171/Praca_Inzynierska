@@ -34,7 +34,8 @@ router.post('/', [auth, [
                 user: req.user.id,
                 location: profile ? profile.location : 'Nie podano',
                 types: req.body.types,
-                title: req.body.title
+                title: req.body.title,
+                typeOS: req.body.typeOS
             });
 
             const post = await newPost.save();

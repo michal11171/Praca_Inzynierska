@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { addLike, removeLike, deletePost } from '../../actions/post';
 
 const PostItem = ({ addLike, removeLike, deletePost, auth,
-    post: { _id, text, name, avatar, user, likes, comments, date, location, title },
+    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS },
     showActions }) => (
     <div class="post bg-white p-1 my-1">
         <div>
@@ -21,6 +21,7 @@ const PostItem = ({ addLike, removeLike, deletePost, auth,
             </Link>
         </div>
         <div>
+
             <p className="posttypes">{title}</p>
             <p class="my-1">
                 {text}

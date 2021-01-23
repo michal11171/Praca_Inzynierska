@@ -7,9 +7,10 @@ const PostForm = ({ addPost }) => {
     const [formData, setFormData] = useState({
         text: '',
         types: '',
-        title: ''
+        title: '',
+        typeOS: ''
     });
-    const { text, types, title } = formData;
+    const { text, types, title, typeOS } = formData;
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     return (
         <div class="post-form">
@@ -18,19 +19,26 @@ const PostForm = ({ addPost }) => {
             </div>
             <form class="form my-1" onSubmit={e => {
                 e.preventDefault();
-                addPost({ text, types, title });
+                addPost({ text, types, title, typeOS });
                 setFormData({
                     text: '',
                     types: '',
-                    title: ''
+                    title: '',
+                    typeOS: ''
                 });
 
 
             }}>
                 <select name="types" placeholder="typ pracy" value={types} onChange={e => onChange(e)}>
+                    <option value="0">* Wybierz czego dotyczy twoje ogłoszenie</option>
+                    <option value="praca">Praca</option>
+                    <option value="usluga">Usługa</option>
+                </select>
+                <br></br>
+                <select name="typeOS" placeholder="szukam/oferuje" value={typeOS} onChange={e => onChange(e)}>
                     <option value="0">* Wybierz rodzaj ogłoszenia</option>
-                    <option value="praca">Szukam/oferuję pracę dorywczą</option>
-                    <option value="usluga">Oferuję usługę</option>
+                    <option value="szukam">Szukam</option>
+                    <option value="oferuje">Oferuję</option>
                 </select>
                 <br></br>
                 <input type="text" placeholder="Podaj tytuł" name="title" value={title} onChange={e => onChange(e)} />
