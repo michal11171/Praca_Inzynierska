@@ -17,7 +17,7 @@ const PostsO = ({ getPosts, post: { posts } }) => {
     const [rodzaj, setRodzaj] = useState('wszystko');
     const CaleM = '';
     const miasto = "Wrocław";
-    const result = arryayPosts.filter(post => post.types === "usluga" && post.type === "");
+    const result = arryayPosts.filter(post => post.types === "usluga" && !post.type);
 
     const [inp, setInp] = useState('');
     let miasta = result.filter(post => post.location.toLowerCase().includes(inp.toLowerCase()));

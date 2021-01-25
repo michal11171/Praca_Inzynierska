@@ -9,10 +9,10 @@ const PostForm = ({ addPost, id }) => {
         types: '',
         title: '',
         typeOS: '',
-        type: '',
+        type: ''
     });
     const [er, setEr] = useState('');
-    const { text, types, title, typeOS } = formData;
+    const { text, types, title, typeOS, type } = formData;
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     return (
         <div class="post-form">
