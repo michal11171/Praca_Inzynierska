@@ -25,4 +25,11 @@ export const ADD_COMMENTP = 'ADD_COMMENTP';
 export const REMOVE_COMMENTP = 'REMOVE_COMMENTP';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FILTER_BY_VALUE = 'FILTER_BY_VALUE';
+export const GET_GROUPS = 'GET_GROUPS';
+export const GET_GROUP = 'GET_GROUP';
+export const ADD_GROUP = 'ADD_GROUP';
+export const DELETE_GROUP = 'DELETE_GROUP';
+export const GROUP_ERROR = 'GROUP_ERROR';
+export const CLEAR_GROUP = 'CLEAR_GROUP';
+export const UPDATE_MEMBERS = 'UPDATE_MEMBERS';
 

@@ -60,6 +60,9 @@ img {
   color: red;
   font-weight: 700;
 }
+.boxes {
+  width: 73%;
+}
 .commentloc {
   color: #555;
   font-size: 115%;

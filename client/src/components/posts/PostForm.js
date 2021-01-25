@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, id }) => {
     const [formData, setFormData] = useState({
         text: '',
         types: '',
         title: '',
-        typeOS: ''
+        typeOS: '',
+        type: '',
     });
     const [er, setEr] = useState('');
     const { text, types, title, typeOS } = formData;
@@ -20,12 +21,13 @@ const PostForm = ({ addPost }) => {
             </div>
             <form class="form my-1" onSubmit={e => {
                 e.preventDefault();
-                if (types !== '' && typeOS !== '') { addPost({ text, types, title, typeOS }); setEr(''); } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
+                if (types !== '' && typeOS !== '') { addPost({ text, types, title, typeOS, type: id }); setEr(''); } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
                 setFormData({
                     text: '',
                     types: '',
                     title: '',
-                    typeOS: ''
+                    typeOS: '',
+                    type: ''
                 });
 
 

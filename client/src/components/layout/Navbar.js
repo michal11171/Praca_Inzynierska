@@ -25,6 +25,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Oferty usług
         </Link>
       </li>
+      <li><Link to='/groups'>
+        Grupy</Link>
+      </li>
       <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}
@@ -51,7 +54,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   return (
     <nav className="navbar bg-dark">
       <h1>
-        <Link to="/"><i className="fas fa-briefcase"></i> FindJob</Link>
+        <Link to="/"><i className="fas fa-briefcase"></i> Dorabiaj.pl</Link>
       </h1>
       { !loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
     </nav>

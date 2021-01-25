@@ -65,6 +65,9 @@ const PostSchema = new Schema({
     },
     typeOS: {
         type: String
+    },
+    type: {
+        type: String
     }
 });
 

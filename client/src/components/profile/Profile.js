@@ -47,8 +47,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
     const mapContainerStyle = {
         width: "47vw",
         height: "50vh"
+
     }
-    console.log("DZIALA?", lat, lng)
+
     const center = {
         lat: lat,
         lng: lng
@@ -72,7 +73,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
     }, []);
 
 
-    console.log("TEEEEEEEEEEEEEST:", locationsMarker);
+
     const moveTo = React.useCallback(({ lat, lng }) => {
         mapRef.current.moveTo({ lat, lng });
         mapRef.current.setZoom(14);
@@ -119,13 +120,13 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
 
                 <Button onClick={async (address) => {
                     const profloc = profile.location;
-                    console.log("BBB:", profloc);
+
                     try {
 
                         const xd = await Geocode.fromAddress(profloc).then(
                             response => {
                                 const { lat, lng } = response.results[0].geometry.location;
-                                console.log("POP:", lat, lng);
+
                                 setLat(lat);
                                 setLng(lng);
 
