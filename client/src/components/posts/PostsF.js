@@ -7,7 +7,7 @@ import { getPosts } from '../../actions/post';
 import { post } from 'request';
 import { Checkbox } from 'semantic-ui-react';
 
-const PostsO = ({ getPosts, post: { posts } }) => {
+const Posts = ({ getPosts, post: { posts }, auth: { user } }) => {
     useEffect(() => {
         getPosts();
     }, [getPosts]);
@@ -17,7 +17,9 @@ const PostsO = ({ getPosts, post: { posts } }) => {
     const [rodzaj, setRodzaj] = useState('wszystko');
     const CaleM = '';
     const miasto = "Wrocław";
-    const result = arryayPosts.filter(post => post.types === "usluga" && !post.type);
+    const result = arryayPosts.filter(post => !post.type && post.favourites.find(favourites => favourites.user === user._id));
+
+
 
     const [inp, setInp] = useState('');
     let miasta = result.filter(post => post.location.toLowerCase().includes(inp.toLowerCase()));
@@ -30,12 +32,12 @@ const PostsO = ({ getPosts, post: { posts } }) => {
     return (
 
         <Fragment>
-            <h1 className="large text-primary">Ogłoszenia</h1>
+            <h1 className="large text-primary">Ulubione</h1>
             <p className="lead">
-                <i className="fas fa-brush" /> Znajdź coś dla siebie!
+                <i className="fas fa-star" /> Ogłoszenia dodane do ulubionych
       </p>
 
-            <PostForm />
+
             <div className="check">
                 <h3>Wybierz rodzaj ogłoszenia:</h3>
                 <input type="radio" id="wszystko" name="szukam" value="wszystko" onClick={e => { setRodzaj(e.target.value) }}></input>
@@ -81,13 +83,15 @@ const PostsO = ({ getPosts, post: { posts } }) => {
 
 
 
-PostsO.propTypes = {
+Posts.propTypes = {
     getPosts: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    post: state.post
+    post: state.post,
+    auth: state.auth
 });
 
-export default connect(mapStateToProps, { getPosts })(PostsO);
+export default connect(mapStateToProps, { getPosts })(Posts);

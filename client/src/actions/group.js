@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { setAlert } from './alert'
+import axios from 'axios';
+import { setAlert } from './alert';
 import {
     GET_GROUP,
     GET_GROUPS,
@@ -19,33 +19,30 @@ export const getGroups = () => async dispatch => {
         dispatch({
             type: GET_GROUPS,
             payload: res.data
-        })
+        });
     } catch (error) {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
-
-
+};
 
 // Get group
 export const getGroup = id => async dispatch => {
     try {
         const res = await axios.get(`/api/group/${id}`);
-
         dispatch({
             type: GET_GROUP,
             payload: res.data
-        })
+        });
     } catch (error) {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
+};
 
 // Delete group
 export const deleteGroup = id => async dispatch => {
@@ -55,16 +52,16 @@ export const deleteGroup = id => async dispatch => {
         dispatch({
             type: DELETE_GROUP,
             payload: id
-        })
+        });
 
-        dispatch(setAlert('Group Removed', 'success'))
+        dispatch(setAlert('Group Removed', 'success'));
     } catch (error) {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
+};
 
 // Add group
 export const addGroup = formData => async dispatch => {
@@ -72,7 +69,7 @@ export const addGroup = formData => async dispatch => {
         headers: {
             'Content-Type': 'application/json'
         }
-    }
+    };
 
     try {
         const res = await axios.post('/api/group/', formData, config);
@@ -80,34 +77,50 @@ export const addGroup = formData => async dispatch => {
         dispatch({
             type: ADD_GROUP,
             payload: res.data
-        })
+        });
 
-        dispatch(setAlert('Group Created', 'success'))
+        dispatch(setAlert('Group Created', 'success'));
     } catch (error) {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
+};
 
 //Add group member
 export const addMember = id => async dispatch => {
-
     try {
         const res = await axios.put(`/api/group/members/${id}`);
 
         dispatch({
             type: UPDATE_MEMBERS,
             payload: { id, members: res.data }
-        })
+        });
     } catch (error) {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
+};
+
+//Remove group member
+export const removeMember = id => async dispatch => {
+    try {
+        const res = await axios.put(`/api/group/leave/${id}`);
+
+        dispatch({
+            type: UPDATE_MEMBERS,
+            payload: { id, members: res.data }
+        });
+    } catch (error) {
+        dispatch({
+            type: GROUP_ERROR,
+            payload: { msg: error.response.statusText, status: error.response.status }
+        });
+    }
+};
 
 // Edit Group
 export const editGroup = (groupId, formData, history) => async dispatch => {
@@ -116,7 +129,7 @@ export const editGroup = (groupId, formData, history) => async dispatch => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         const res = await axios.put(`/api/group/${groupId}`, formData, config);
 
@@ -127,7 +140,7 @@ export const editGroup = (groupId, formData, history) => async dispatch => {
 
         dispatch(setAlert('Group Updated', 'success'));
 
-        history.push('/groups')
+        history.push('/groups');
     } catch (error) {
         const errors = error.response.data.errors;
 
@@ -138,6 +151,6 @@ export const editGroup = (groupId, formData, history) => async dispatch => {
         dispatch({
             type: GROUP_ERROR,
             payload: { msg: error.response.statusText, status: error.response.status }
-        })
+        });
     }
-}
+};

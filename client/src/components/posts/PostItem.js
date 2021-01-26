@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { addLike, removeLike, deletePost } from '../../actions/post';
+import { addLike, removeLike, deletePost, addFavourites, removeFavourites } from '../../actions/post';
 
-const PostItem = ({ addLike, removeLike, deletePost, auth,
-    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS },
+const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, deletePost, auth,
+    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites },
     showActions }) => (
     <div class="post bg-white p-1 my-1">
         <div>
@@ -40,6 +40,12 @@ const PostItem = ({ addLike, removeLike, deletePost, auth,
                 <button onClick={e => removeLike(_id)} type="button" class="btn btn-light">
                     <i class="fas fa-thumbs-down"></i>
                 </button>
+                <button onClick={e => addFavourites(_id)} type="button" class="btn btn-light">
+                    <i class="fas fa-star"></i> {' '}
+                    {favourites.length > 0 && (
+                        <span>{favourites.length}</span>
+                    )}
+                </button>
                 <Link to={`/posts/${_id}`} class="btn btn-primary">
                     Zaaplikowało: <span class='comment-count'>{comments.length}</span>
 
@@ -67,11 +73,13 @@ PostItem.propTypes = {
     auth: PropTypes.object.isRequired,
     addLike: PropTypes.func.isRequired,
     removeLike: PropTypes.func.isRequired,
-    deletePost: PropTypes.func.isRequired
+    deletePost: PropTypes.func.isRequired,
+    addFavourites: PropTypes.func.isRequired,
+    removeFavourites: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { addLike, removeLike, deletePost })(PostItem)
+export default connect(mapStateToProps, { addLike, removeLike, deletePost, addFavourites, removeFavourites })(PostItem)

@@ -32,7 +32,7 @@ const Posts = ({ getPosts, post: { posts } }) => {
         <Fragment>
             <h1 className="large text-primary">Ogłoszenia</h1>
             <p className="lead">
-                <i className="fas fa-user" /> Znajdź coś dla siebie!
+                <i className="fas fa-hammer" /> Znajdź coś dla siebie!
       </p>
 
             <PostForm />

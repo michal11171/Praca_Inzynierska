@@ -18,17 +18,13 @@ const Group = ({ getGroups, group: { groups, loading } }) => {
             <Container text>
                 <Grid columns='equal'>
                     <Grid.Column width={4}>
-                        <Link to="/add-group"><Button>Stwórz grupę</Button></Link>
+                        <Link to="/add-group"><Button color='green'>Stwórz własną grupę</Button></Link>
                     </Grid.Column>
-                    <Grid.Column stretched>
-                        {/* <Label pointing='left' size='large'>
-                            Didn't find a group that suits you? Just create a new group by clicking here!
-                            </Label> */}
-                    </Grid.Column>
+
                 </Grid>
                 <Header as='h2' icon textAlign='center'>
                     <Icon name='group' circular />
-                    <Header.Content>Groups</Header.Content>
+                    <Header.Content>Grupy</Header.Content>
                 </Header>
                 <Card.Group centered itemsPerRow={4}>
                     {loading ? <Spinner /> : <Fragment>

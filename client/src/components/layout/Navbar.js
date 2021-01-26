@@ -12,21 +12,29 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <ul>
       <li>
         <Link to="/profiles">
+          <i className="fas fa-users" />{' '}
           Użytkownicy
         </Link>
       </li>
       <li>
         <Link to="/posts">
+          <i className="fas fa-hammer" />{' '}
           Oferty pracy
         </Link>
       </li>
       <li>
         <Link to="/postsO">
+          <i className="fas fa-brush" />{' '}
           Oferty usług
         </Link>
       </li>
       <li><Link to='/groups'>
+        <i className="fas fa-object-group" />{' '}
         Grupy</Link>
+      </li>
+      <li><Link to='/postsF'>
+        <i className="fas fa-star" />{' '}
+        Ulubione</Link>
       </li>
       <li>
         <Link to="/dashboard">

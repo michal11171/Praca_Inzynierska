@@ -226,4 +226,53 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+// @route   PUT api/posts/favourite/:id
+// @desc    Add a post to favourites
+// @access  Private
+router.put('/favourite/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        //Check if post has already been liked  
+        if (post.favourites.filter(favourite => favourite.user.toString() === req.user.id).length > 0) {
+            const removeIndex = post.favourites.map(favourite => favourite.user.toString()).indexOf(req.user.id);
+            post.favourites.splice(removeIndex, 1);
+            await post.save();
+            res.json(post.favourites);
+        }
+        else {
+            post.favourites.unshift({ user: req.user.id });
+
+            await post.save();
+            res.json(post.favourites);
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route   PUT api/posts/unfavourite/:id
+// @desc    Delete a post from favourites
+// @access  Private
+router.put('/unfavourite/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        //Check if post has already been liked  
+        if (post.favourites.filter(favourite => favourite.user.toString() === req.user.id).length == 0) {
+            return res.status(400).json({ msg: 'Post has not yet been added to favourites' });
+        }
+
+        // Get remove index
+        const removeIndex = post.favourites.map(favourite => favourite.user.toString()).indexOf(req.user.id);
+        post.favourites.splice(removeIndex, 1);
+
+        await post.save();
+        res.json(post.favourites);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 module.exports = router;

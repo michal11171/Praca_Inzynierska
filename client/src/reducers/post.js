@@ -7,7 +7,8 @@ import {
     GET_POST,
     ADD_COMMENT,
     REMOVE_COMMENT,
-    FILTER_BY_VALUE
+    FILTER_BY_VALUE,
+    UPDATE_FAVOURITES
 } from '../actions/types';
 
 const initialState = {
@@ -55,6 +56,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 posts: state.posts.map(post => post._id === payload.id ? { ...post, likes: payload.likes } : post),
+                loading: false
+            };
+        case UPDATE_FAVOURITES:
+            return {
+                ...state,
+                posts: state.posts.map(post => post._id === payload.id ? { ...post, favourites: payload.favourites } : post),
                 loading: false
             };
         case ADD_COMMENT:

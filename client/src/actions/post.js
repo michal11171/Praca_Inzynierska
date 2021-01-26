@@ -9,7 +9,8 @@ import {
     GET_POST,
     ADD_COMMENT,
     REMOVE_COMMENT,
-    FILTER_BY_VALUE
+    FILTER_BY_VALUE,
+    UPDATE_FAVOURITES
 } from './types';
 
 //Get posts
@@ -157,6 +158,39 @@ export const deleteComment = (postId, commentId) => async dispatch => {
             payload: commentId
         });
         dispatch(setAlert('Pomyślnie usunięto komentarz', 'success'));
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+//Add to favourites
+export const addFavourites = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/posts/favourite/${id}`);
+
+        dispatch({
+            type: UPDATE_FAVOURITES,
+            payload: { id, favourites: res.data }
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+//Remove from favourites
+export const removeFavourites = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/posts/unfavourite/${id}`);
+
+        dispatch({
+            type: UPDATE_FAVOURITES,
+            payload: { id, favourites: res.data }
+        });
     } catch (err) {
         dispatch({
             type: POST_ERROR,

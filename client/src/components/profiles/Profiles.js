@@ -13,7 +13,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
     return <Fragment>
         {loading ? <Spinner /> : <Fragment>
             <h1 className="large text-primary">Użytkownicy</h1>
-            <p className="lead"><i className="fab fa-connectdevelop"></i> Twoi potencjalni pracodawcy/pracownicy </p>
+            <p className="lead"><i className="fas fa-users"></i> Twoi potencjalni pracodawcy/pracownicy </p>
             <div className="profiles">
                 {profiles.length > 0 ? (
                     profiles.map(profile => (

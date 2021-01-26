@@ -21,14 +21,16 @@ const PostForm = ({ addPost, id }) => {
             </div>
             <form class="form my-1" onSubmit={e => {
                 e.preventDefault();
-                if (types !== '' && typeOS !== '') { addPost({ text, types, title, typeOS, type: id }); setEr(''); } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
-                setFormData({
-                    text: '',
-                    types: '',
-                    title: '',
-                    typeOS: '',
-                    type: ''
-                });
+                if (types !== '' && typeOS !== '') {
+                    addPost({ text, types, title, typeOS, type: id }); setEr(''); setFormData({
+                        text: '',
+                        types: '',
+                        title: '',
+                        typeOS: '',
+                        type: ''
+                    });
+                } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
+
 
 
             }}>
