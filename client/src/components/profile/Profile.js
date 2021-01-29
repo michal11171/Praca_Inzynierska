@@ -251,7 +251,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 <br></br>
                 <br></br>
                 <ProfileCommentsForm profileId={profile._id} />
-                <div className="comments">
+                <div className="comments wrap">
                     {profile.comments.map(comment => (
                         <ProfileComments key={comment._id} comment={comment} profileId={profile._id} />
                     ))}
