@@ -1,4 +1,14 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, UPDATE_PROFILE, GET_PROFILES, UPDATE_LIKESC, ADD_COMMENTP, REMOVE_COMMENTP } from "../actions/types";
+import {
+    GET_PROFILE,
+    PROFILE_ERROR,
+    CLEAR_PROFILE,
+    UPDATE_PROFILE,
+    GET_PROFILES,
+    UPDATE_LIKESC,
+    ADD_COMMENTP,
+    REMOVE_COMMENTP,
+    UPDATE_UNLIKESC
+} from "../actions/types";
 
 const initialState = {
     profile: null,
@@ -64,6 +74,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 profile: { ...state.profile, likes: payload.likes },
+                loading: false
+            };
+        case UPDATE_UNLIKESC:
+            return {
+                ...state,
+                profile: { ...state.profile, unlikes: payload.unlikes },
                 loading: false
             };
         default:

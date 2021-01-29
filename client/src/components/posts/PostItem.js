@@ -20,12 +20,13 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                 <h5></h5>
             </Link>
         </div>
-        <div>
+        <div className="posttext">
 
-            <p className="posttypes">{title}</p>
+            <p className="posttypes wrap" >{title}</p>
             <p class="my-1">
-                {text}
+                <div className="wrap">{text}</div>
             </p>
+            <hr className="hrpost"></hr>
             <p className="postloc">Lokalizacja: {location}</p>
             <p class="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
 
@@ -37,9 +38,9 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                         <span>{likes.length}</span>
                     )}
                 </button>
-                <button onClick={e => removeLike(_id)} type="button" class="btn btn-light">
+                {/* <button onClick={e => removeLike(_id)} type="button" class="btn btn-light">
                     <i class="fas fa-thumbs-down"></i>
-                </button>
+                </button> */}
                 <button onClick={e => addFavourites(_id)} type="button" class="btn btn-light">
                     <i class="fas fa-star"></i> {' '}
                     {favourites.length > 0 && (

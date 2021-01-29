@@ -31,7 +31,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 
 const Profile = ({ addLikeP, removeLikeP, getProfileById,
-    profile: { profile, loading, _id, likes, location },
+    profile: { profile, loading, _id, likes, location, unlikes },
     auth, match }) => {
     useEffect(() => {
         getProfileById(match.params.id);
@@ -40,7 +40,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
 
     const [lat, setLat] = useState('');
     const [lng, setLng] = useState('');
-
+    const [likeerr, setLikeErr] = useState('');
     const [markers, setMarkers] = useState([]);
 
     const libraries = ["places"];
@@ -95,6 +95,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
         }
     }
 
+    function submitButtonStyle(_this) {
+        _this.style.backgroundColor = "red";
+    }
 
     function Search({ moveTo }) {
         const [state, dispatch] = React.useReducer(exampleReducer, {
@@ -114,6 +117,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 radius: 100 * 1000,
             },
         });
+
         return (
             <div className="searchbtn">
 
@@ -175,11 +179,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     </Modal.Content>
                     <Modal.Actions>
                         <Button negative onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
-                            Disagree
+                            Zamknij
           </Button>
-                        <Button positive onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
-                            Agree
-          </Button>
+
                     </Modal.Actions>
                 </Modal>
 
@@ -226,6 +228,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                 </div>
 
                 {(<Fragment>
+
+                    <div className="likerr">{likeerr}</div>
+
                     <a className="likeuser">Czy ten użytkownik Ci pomógł?</a>
                     <button onClick={e => addLikeP(profile._id)} type="button" class="btn btn-light">
 
@@ -237,6 +242,9 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     </button>
                     <button onClick={e => removeLikeP(profile._id)} type="button" class="btn btn-light">
                         <i class="fas fa-thumbs-down"></i>
+                        {profile.unlikes.length > 0 && (
+                            <span>{profile.unlikes.length}</span>
+                        )}
                     </button>
 
                 </Fragment>)}

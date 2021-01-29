@@ -11,7 +11,9 @@ import {
     ADD_COMMENTP,
     POST_ERROR,
     REMOVE_COMMENTP,
-    UPDATE_LIKESC
+    UPDATE_LIKESC,
+    UPDATE_UNLIKESC,
+    UPDATE_LIKES
 } from './types';
 
 //Get current users profile
@@ -218,11 +220,11 @@ export const deleteComment = (profileId, commentId) => async dispatch => {
 export const addLikeP = id => async dispatch => {
     try {
         const res = await axios.put(`/api/profile/like/${id}`);
-
         dispatch({
             type: UPDATE_LIKESC,
             payload: { id, likes: res.data }
         });
+
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -231,15 +233,20 @@ export const addLikeP = id => async dispatch => {
     }
 };
 
-//Remove like
+//Unlike
 export const removeLikeP = id => async dispatch => {
     try {
         const res = await axios.put(`/api/profile/unlike/${id}`);
 
         dispatch({
-            type: UPDATE_LIKESC,
-            payload: { id, likes: res.data }
+            type: UPDATE_UNLIKESC,
+            payload: { id, unlikes: res.data }
         });
+
+        // dispatch({
+        //     type: UPDATE_LIKESC,
+        //     payload: { id, likes: res.data }
+        // });
     } catch (err) {
         dispatch({
             type: POST_ERROR,

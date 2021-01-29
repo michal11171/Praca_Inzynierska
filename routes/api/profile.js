@@ -300,12 +300,24 @@ router.put('/like/:id', auth, async (req, res) => {
         const profile = await Profile.findById(req.params.id);
         //Check if profile has already been liked  
         if (profile.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-            return res.status(400).json({ msg: 'Profile already liked' });
-        }
-        profile.likes.unshift({ user: req.user.id });
+            const removeIndex = profile.likes.map(like => like.user.toString()).indexOf(req.user.id);
+            profile.likes.splice(removeIndex, 1);
 
-        await profile.save();
-        res.json(profile.likes);
+            await profile.save();
+            res.json(profile.likes);
+        }
+        else {
+
+            if (profile.unlikes.filter(unlike => unlike.user.toString() === req.user.id).length > 0) {
+                console.log("MASZ UNLIKE");
+            }
+            else {
+                profile.likes.unshift({ user: req.user.id });
+
+                await profile.save();
+                res.json(profile.likes);
+            }
+        }
 
     } catch (err) {
         console.error(err.message);
@@ -319,17 +331,27 @@ router.put('/like/:id', auth, async (req, res) => {
 router.put('/unlike/:id', auth, async (req, res) => {
     try {
         const profile = await Profile.findById(req.params.id);
-        //Check if post has already been liked  
-        if (profile.likes.filter(like => like.user.toString() === req.user.id).length == 0) {
-            return res.status(400).json({ msg: 'Profile has not yet been liked' });
+        //Check if profile has already been liked  
+        if (profile.unlikes.filter(unlike => unlike.user.toString() === req.user.id).length > 0) {
+            const removeIndex = profile.unlikes.map(unlike => unlike.user.toString()).indexOf(req.user.id);
+            profile.unlikes.splice(removeIndex, 1);
+
+            await profile.save();
+            res.json(profile.unlikes);
         }
+        else {
 
-        // Get remove index
-        const removeIndex = profile.likes.map(like => like.user.toString()).indexOf(req.user.id);
-        profile.likes.splice(removeIndex, 1);
 
-        await profile.save();
-        res.json(profile.likes);
+            if (profile.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+                console.log("MASZ LAJKA")
+            }
+            else {
+                profile.unlikes.unshift({ user: req.user.id });
+
+                await profile.save();
+                res.json(profile.unlikes);
+            }
+        }
 
     } catch (err) {
         console.error(err.message);
@@ -337,4 +359,23 @@ router.put('/unlike/:id', auth, async (req, res) => {
     }
 });
 
+// @route   GET api/profile/likes/:user_id
+// @desc    Get all likes by profile ID
+// @access  Public
+router.get('/likes/:user_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('likes');
+        if (!profile) {
+            return res.status(400).json({ msg: 'Profile not found' });
+        }
+        res.json(profile);
+
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind == 'ObjectId') {
+            return res.status(400).json({ msg: 'Profile not found' });
+        }
+        res.status(500).send('Server Error');
+    }
+})
 module.exports = router;

@@ -93,6 +93,14 @@ const ProfileSchema = new monogoose.Schema({
       }
     }
   ],
+  unlikes: [
+    {
+      user: {
+        type: monogoose.Schema.Types.ObjectId,
+        ref: 'users'
+      }
+    }
+  ]
 });
 
 module.exports = Profile = monogoose.model('profile', ProfileSchema);

@@ -34,7 +34,6 @@ img {
   width: 100%;
 }
 .posttypes {
-  width: 45%;
   font-weight: bold;
 }
 .likeuser {
@@ -62,6 +61,18 @@ img {
 }
 .boxes {
   width: 73%;
+}
+.procenty {
+  padding-top: 10px;
+  font-weight: 800;
+}
+.hrpost {
+  color: green;
+  margin-bottom: 10px;
+}
+.wrap {
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 .commentloc {
   color: #555;
