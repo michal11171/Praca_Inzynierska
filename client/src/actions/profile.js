@@ -13,7 +13,8 @@ import {
     REMOVE_COMMENTP,
     UPDATE_LIKESC,
     UPDATE_UNLIKESC,
-    UPDATE_LIKES
+    UPDATE_LIKES,
+    UPDATE_USER
 } from './types';
 
 //Get current users profile
@@ -248,6 +249,25 @@ export const removeLikeP = id => async dispatch => {
         //     payload: { id, likes: res.data }
         // });
     } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+//Add ban
+export const banUser = id => async dispatch => {
+    try {
+        console.log(id);
+        const res = await axios.put(`/api/users/ban/${id}`);
+        console.log("aaA: ")
+        dispatch({
+            type: UPDATE_USER,
+            payload: { id, profiles: res.data }
+        });
+    } catch (err) {
+        console.log(err)
         dispatch({
             type: POST_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }

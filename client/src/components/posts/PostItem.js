@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { addLike, removeLike, deletePost, addFavourites, removeFavourites } from '../../actions/post';
+import { addLike, removeLike, deletePost, addFavourites, removeFavourites, reportPost, unreportPost } from '../../actions/post';
+import post from '../../reducers/post';
 
-const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, deletePost, auth,
-    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites },
+
+
+const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, deletePost, reportPost, unreportPost, auth,
+    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites, reports },
     showActions }) => (
+
     <div class="post bg-white p-1 my-1">
         <div>
             <Link to={`/profile/${user}`}>
@@ -51,12 +55,23 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                     Zaaplikowało: <span class='comment-count'>{comments.length}</span>
 
                 </Link>
-                {!auth.loading && user === auth.user._id && (
+                {(!auth.loading && user === auth.user._id) || (auth.user ? (auth.user.admin === "true") : (false)) && (
                     <button onClick={e => deletePost(_id)}
                         type="button" class="btn btn-danger">
                         <i class="fas fa-times"></i>
                     </button>
                 )}
+                {!auth.loading && user !== auth.user._id && auth.user.admin === "false" && (
+                    <button onClick={e => reportPost(_id)} type="button" class="btn btn-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </button>
+                )}
+                {!auth.loading && auth.user.admin === "true" && reports.length > 0 && (
+                    <button onClick={e => unreportPost(_id)} type="button" class="btn btn-submit">
+                        <i class="fas fa-check"></i>
+                    </button>
+                )}
+
             </Fragment>)}
 
 
@@ -76,11 +91,13 @@ PostItem.propTypes = {
     removeLike: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
     addFavourites: PropTypes.func.isRequired,
-    removeFavourites: PropTypes.func.isRequired
+    removeFavourites: PropTypes.func.isRequired,
+    reportPost: PropTypes.func.isRequired,
+    unreportPost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { addLike, removeLike, deletePost, addFavourites, removeFavourites })(PostItem)
+export default connect(mapStateToProps, { addLike, removeLike, deletePost, addFavourites, removeFavourites, reportPost, unreportPost })(PostItem)

@@ -7,8 +7,10 @@ import { logout } from '../../actions/auth';
 
 
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
+
   const authLinks = (
+
     <ul>
       <li>
         <Link to="/profiles">
@@ -36,6 +38,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <i className="fas fa-star" />{' '}
         Ulubione</Link>
       </li>
+      {(user ? (user.admin === "true") : (false)) && (<li><Link to='/postsR'>
+        <i className="fas fa-exclamation-triangle" />{' '}
+        Zgłoszenia</Link>
+      </li>)}
+
       <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}

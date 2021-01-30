@@ -7,14 +7,17 @@ import {
     UPDATE_LIKESC,
     ADD_COMMENTP,
     REMOVE_COMMENTP,
-    UPDATE_UNLIKESC
+    UPDATE_UNLIKESC,
+    UPDATE_USER
 } from "../actions/types";
 
 const initialState = {
     profile: null,
     profiles: [],
     loading: true,
-    error: {}
+    error: {},
+    user: null,
+    users: []
 }
 
 export default function (state = initialState, action) {
@@ -80,6 +83,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 profile: { ...state.profile, unlikes: payload.unlikes },
+                loading: false
+            };
+        case UPDATE_USER:
+            return {
+                ...state,
+                user: { ...state.user, ban: payload.ban },
                 loading: false
             };
         default:

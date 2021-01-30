@@ -20,6 +20,14 @@ const UserSchema = new moongose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    admin: {
+        type: String,
+        required: true
+    },
+    ban: {
+        type: String,
+        required: true
     }
 });
 

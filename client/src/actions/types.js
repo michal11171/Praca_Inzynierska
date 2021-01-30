@@ -22,6 +22,7 @@ export const UPDATE_UNLIKESC = 'UPDATE_UNLIKESC';
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
 export const GET_POST = 'GET_POST';
+export const REPORT_POST = 'REPORT_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENTP = 'ADD_COMMENTP';
 export const REMOVE_COMMENTP = 'REMOVE_COMMENTP';
@@ -34,4 +35,6 @@ export const DELETE_GROUP = 'DELETE_GROUP';
 export const GROUP_ERROR = 'GROUP_ERROR';
 export const CLEAR_GROUP = 'CLEAR_GROUP';
 export const UPDATE_MEMBERS = 'UPDATE_MEMBERS';
+export const UPDATE_REPORTS = 'UPDATE_REPORTS';
+export const UPDATE_USER = 'UPDATE_USER';
 

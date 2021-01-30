@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
-import { getProfileById, addLikeP, removeLikeP } from '../../actions/profile';
+import { getProfileById, addLikeP, removeLikeP, banUser } from '../../actions/profile';
 import ProfileComments from './ProfileComments';
 import ProfileCommentsForm from './ProfileCommentsForm';
 import Geocode from 'react-geocode';
@@ -30,7 +30,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 
 
-const Profile = ({ addLikeP, removeLikeP, getProfileById,
+const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
     profile: { profile, loading, _id, likes, location, unlikes },
     auth, match }) => {
     useEffect(() => {
@@ -199,8 +199,15 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById,
                     Przeglądaj wszystkie profile
                 </Link>
                 {auth.isAuthenticated && auth.loading === false &&
-                    auth.user._id === profile.user._id &&
+                    auth.user?._id === profile.user?._id &&
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
+
+                {(auth.user ? (auth.user.admin === "true") : (false)) && (
+                    <button onClick={e => banUser(profile.user?._id)}
+                        type="button" class="btn btn-danger">
+                        <i class="fas fa-ban"></i>
+                    </button>)}
+
 
                 <div>
 
@@ -266,7 +273,8 @@ Profile.propTypes = {
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     addLikeP: PropTypes.func.isRequired,
-    removeLikeP: PropTypes.func.isRequired
+    removeLikeP: PropTypes.func.isRequired,
+    banUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -274,4 +282,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { addLikeP, removeLikeP, getProfileById })(Profile)
+export default connect(mapStateToProps, { addLikeP, removeLikeP, getProfileById, banUser })(Profile)

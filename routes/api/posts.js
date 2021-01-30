@@ -36,7 +36,8 @@ router.post('/', [auth, [
                 types: req.body.types,
                 title: req.body.title,
                 typeOS: req.body.typeOS,
-                type: req.body.type
+                type: req.body.type,
+                report: "false"
             });
 
             const post = await newPost.save();
@@ -90,14 +91,19 @@ router.get('/:id', auth, async (req, res) => {
 router.delete('/:id', auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-
+        const user = await User.findById(req.user.id);
         if (!post) {
             return res.status(404).json({ msg: 'Post not found' });
         }
 
         // Check if user is a author of the post
         if (post.user.toString() !== req.user.id) {
-            return res.status(401).json({ msg: 'User not authorized' });
+            if (user.admin === "true") {
+                await post.remove();
+            }
+            else {
+                return res.status(401).json({ msg: 'User not authorized' });
+            }
         }
 
         await post.remove();
@@ -275,6 +281,51 @@ router.put('/unfavourite/:id', auth, async (req, res) => {
 
         await post.save();
         res.json(post.favourites);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+// @route   PUT api/posts/report/:id
+// @desc    Report a post
+// @access  Private
+router.put('/report/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        //Check if post has already been reported 
+        if (post.reports.filter(report => report.user.toString() === req.user.id).length > 0) {
+
+        }
+        else {
+            post.reports.unshift({ user: req.user.id });
+
+            await post.save();
+            res.json(post.reports);
+        }
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+// @route   PUT api/posts/unreport/:id
+// @desc    Unreport a post
+// @access  Private
+router.put('/unreport/:id', auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        //Check if post has reports 
+        if (post.reports.filter(report => report.user.toString() === req.user.id).length == 0) {
+
+        }
+
+        // Get remove index
+
+        post.reports = [];
+
+        await post.save();
+        res.json(post.reports);
 
     } catch (err) {
         console.error(err.message);

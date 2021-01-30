@@ -28,6 +28,14 @@ const PostSchema = new Schema({
             }
         }
     ],
+    reports: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            }
+        }
+    ],
     comments: [
         {
             user: {
@@ -76,7 +84,7 @@ const PostSchema = new Schema({
                 ref: 'users'
             }
         }
-    ]
+    ],
 });
 
 module.exports = Post = mongoose.model('post', PostSchema);

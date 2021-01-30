@@ -10,7 +10,9 @@ import {
     ADD_COMMENT,
     REMOVE_COMMENT,
     FILTER_BY_VALUE,
-    UPDATE_FAVOURITES
+    UPDATE_FAVOURITES,
+    REPORT_POST,
+    UPDATE_REPORTS
 } from './types';
 
 //Get posts
@@ -199,6 +201,38 @@ export const removeFavourites = id => async dispatch => {
     }
 };
 
+//Report post
+export const reportPost = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/posts/report/${id}`);
+
+        dispatch({
+            type: UPDATE_REPORTS,
+            payload: { id, reports: res.data }
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+//Remove report
+export const unreportPost = id => async dispatch => {
+    try {
+        const res = await axios.put(`api/posts/unreport/${id}`);
+
+        dispatch({
+            type: UPDATE_REPORTS,
+            payload: { id, reports: res.data }
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
 //Filter by location
 export const filterByValue = payload => ({
     type: FILTER_BY_VALUE,
