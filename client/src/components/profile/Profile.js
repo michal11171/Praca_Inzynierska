@@ -206,7 +206,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                     (profile.user ? (profile.user.ban === "false") : (false)) && (
                         <button onClick={e => banUser(profile.user?._id)}
                             type="button" class="btn btn-danger">
-                            <i class="fas fa-ban"> {profile.user.ban}</i>
+                            <i class="fas fa-ban"> Zablokuj</i>
                         </button>))
                 }
 
@@ -214,7 +214,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                     (profile.user ? (profile.user.ban === "true") : (false)) && (
                         <button onClick={e => unbanUser(profile.user?._id)}
                             type="button" class="btn btn-success">
-                            <i class="fas fa-check"> {profile.user.ban}</i>
+                            <i class="fas fa-check"> Odblokuj</i>
                         </button>))
                 }
 
