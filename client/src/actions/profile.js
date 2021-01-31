@@ -265,6 +265,7 @@ export const banUser = id => async dispatch => {
             payload: { id, ban: res.data }
 
         });
+
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -279,7 +280,9 @@ export const unbanUser = id => async dispatch => {
         dispatch({
             type: UPDATE_USER,
             payload: { id, ban: res.data }
+
         });
+
     } catch (err) {
         dispatch({
             type: POST_ERROR,

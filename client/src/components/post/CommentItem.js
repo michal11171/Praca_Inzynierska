@@ -30,11 +30,23 @@ const CommentItem = ({
                 Dodano <Moment format='DD/MM/YYYY'>{date}</Moment>
                 <p className="commentloc">Lokalizacja: {location}</p>
             </p>
-            {!auth.loading && user === auth.user._id && (
-                <button onClick={e => deleteComment(postId, _id)} type='button' className='btn btn-danger'>
-                    <i className="fas fa-times"></i>
+
+
+            {(!auth.loading && user === auth.user._id) && (auth.user.admin === "false") && (
+                <button onClick={e => deleteComment(postId, _id)}
+                    type="button" class="btn btn-danger">
+                    <i class="fas fa-times"></i>
                 </button>
             )}
+
+            {(auth.user ? (auth.user.admin === "true") : (false)) && (
+                <button onClick={e => deleteComment(postId, _id)}
+                    type="button" class="btn btn-danger">
+                    <i class="fas fa-times"></i>
+                </button>
+            )}
+
+
         </div>
     </div>
 );

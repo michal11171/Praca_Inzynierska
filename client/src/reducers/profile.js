@@ -89,7 +89,9 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 user: { ...state.user, ban: payload.ban },
-                loading: false
+                profile: { ...state.profile, user: { ...state.profile.user, ban: payload.ban } },
+                loading: false,
+
             };
         default:
             return state;

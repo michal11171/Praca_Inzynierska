@@ -29,9 +29,23 @@ const ProfileComments = ({
             <p class="post-date">
                 Dodano <Moment format='DD/MM/YYYY'>{date}</Moment>
             </p>
-            {!auth.loading && user === auth.user._id && (
+            {/* {!auth.loading && user === auth.user._id && (
                 <button onClick={e => deleteComment(profileId, _id)} type='button' className='btn btn-danger'>
                     <i className="fas fa-times"></i>
+                </button>
+            )} */}
+
+            {(!auth.loading && user === auth.user._id) && (auth.user.admin === "false") && (
+                <button onClick={e => deleteComment(profileId, _id)}
+                    type="button" class="btn btn-danger">
+                    <i class="fas fa-times"></i>
+                </button>
+            )}
+
+            {(auth.user ? (auth.user.admin === "true") : (false)) && (
+                <button onClick={e => deleteComment(profileId, _id)}
+                    type="button" class="btn btn-danger">
+                    <i class="fas fa-times"></i>
                 </button>
             )}
         </div>

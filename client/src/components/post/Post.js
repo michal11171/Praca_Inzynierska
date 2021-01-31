@@ -8,7 +8,7 @@ import CommentForm from '../post/CommentForm';
 import CommentItem from '../post/CommentItem';
 import { getPost, getPosts } from '../../actions/post';
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ getPost, post: { post, loading }, match, auth }) => {
     useEffect(() => {
         getPost(match.params.id);
     }, [getPost]);
@@ -16,7 +16,10 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
     return loading || post === null ? <Spinner /> : <Fragment>
         <Link to='/posts' className='btn'>Wróć do ogłoszeń</Link>
         <PostItem post={post} showActions={false} />
-        <CommentForm postId={post._id} />
+        {(auth.user ? (auth.user.ban === "false") : (false)) && (
+            <CommentForm postId={post._id} />)}
+        {(auth.user ? (auth.user.ban === "true") : (false)) && (
+            <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz dodawać komentarzy.</div>)}
         <div className="comments">
             {post.comments.map(comment => (
                 <CommentItem key={comment._id} comment={comment} postId={post._id} />
@@ -27,11 +30,13 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
 
 Post.propTypes = {
     getPost: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    post: state.post
+    post: state.post,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { getPost })(Post)

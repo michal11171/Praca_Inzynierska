@@ -15,7 +15,8 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
     return loading && profile === null ? (<Spinner />) : (<Fragment>
         <h1 className="large text-primary">Panel użytkownika</h1>
         <p className="lead"><i className="fas fa-user"></i> Witaj {user && user.name}</p>
-        {(user ? (user.ban === "true") : (false)) && (<div class="baninfo">Twoje konto zostało zablokowane.</div>)}
+        {(user ? (user.ban === "true") : (false)) && (<div class="baninfo">Twoje konto zostało zablokowane.
+            <br></br>Ograniczyliśmy także możliwość edycji Twojego profilu.</div>)}
         {profile !== null ? (
             <Fragment>
                 {(user ? (user.ban === "false") : (false)) && (
