@@ -256,18 +256,31 @@ export const removeLikeP = id => async dispatch => {
     }
 };
 
-//Add ban
+//Ban user
 export const banUser = id => async dispatch => {
     try {
-        console.log(id);
         const res = await axios.put(`/api/users/ban/${id}`);
-        console.log("aaA: ")
         dispatch({
             type: UPDATE_USER,
-            payload: { id, profiles: res.data }
+            payload: { id, ban: res.data }
+
         });
     } catch (err) {
-        console.log(err)
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+//Unban User
+export const unbanUser = id => async dispatch => {
+    try {
+        const res = await axios.put(`/api/users/unban/${id}`);
+        dispatch({
+            type: UPDATE_USER,
+            payload: { id, ban: res.data }
+        });
+    } catch (err) {
         dispatch({
             type: POST_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }

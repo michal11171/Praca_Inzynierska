@@ -86,8 +86,24 @@ router.post('/', [
 router.put('/ban/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
-        console.log("XD:", user)
         user.ban = "true"
+
+        await user.save();
+        res.json(user.ban);
+
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+// @route   PUT api/users/unban/:id
+// @desc    Unan user
+// @access  Private
+router.put('/unban/:id', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        user.ban = "false"
 
         await user.save();
         res.json(user.ban);

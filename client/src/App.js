@@ -16,6 +16,7 @@ import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import AddExperience from './components/profile-forms/AddExperience';
 import Profiles from './components/profiles/Profiles';
+import BannedProfiles from './components/profiles/BannedProfiles';
 import Profile from './components/profile/Profile';
 import Post from './components/post/Post';
 import Posts from './components/posts/Posts';
@@ -47,8 +48,9 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
-              <Route exact path='/profiles' component={Profiles} />
-              <Route exact path='/profile/:id' component={Profile} />
+              <PrivateRoute exact path='/profiles' component={Profiles} />
+              <PrivateRoute exact path='/profile/:id' component={Profile} />
+              <PrivateRoute exact path='/bannedprofiles' component={BannedProfiles} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute exact path='/create-profile' component={CreateProfile} />
               <PrivateRoute exact path='/edit-profile' component={EditProfile} />

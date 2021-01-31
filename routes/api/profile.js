@@ -13,7 +13,7 @@ const { compare } = require('bcryptjs');
 // @access  Private
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar', 'ban']);
 
         if (!profile) {
             return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -104,7 +104,7 @@ router.post('/', [
 // @access  Public
 router.get('/', async (req, res) => {
     try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+        const profiles = await Profile.find().populate('user', ['name', 'avatar', 'ban']);
         res.json(profiles);
     } catch (err) {
         console.error(err.message);
@@ -117,7 +117,7 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/user/:user_id', async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar', 'ban']);
         if (!profile) {
             return res.status(400).json({ msg: 'Profile not found' });
         }
@@ -208,7 +208,7 @@ router.put(
     });
 
 // @route   DELETE api/profile/experience/:exp_id
-// @desc    Delete one of profile experience
+// @desc    Delete one of profile experiences
 // @access  Private
 
 router.delete('/experience/:exp_id', auth, async (req, res) => {

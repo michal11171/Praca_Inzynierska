@@ -42,6 +42,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
         <i className="fas fa-exclamation-triangle" />{' '}
         Zgłoszenia</Link>
       </li>)}
+      {(user ? (user.admin === "true") : (false)) && (<li><Link to='/bannedprofiles'>
+        <i className="fas fa-ban" />{' '}
+        Zablokowani</Link>
+      </li>)}
 
       <li>
         <Link to="/dashboard">

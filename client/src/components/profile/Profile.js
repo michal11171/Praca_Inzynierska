@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
-import { getProfileById, addLikeP, removeLikeP, banUser } from '../../actions/profile';
+import { getProfileById, addLikeP, removeLikeP, banUser, unbanUser } from '../../actions/profile';
 import ProfileComments from './ProfileComments';
 import ProfileCommentsForm from './ProfileCommentsForm';
 import Geocode from 'react-geocode';
@@ -30,7 +30,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 
 
-const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
+const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
     profile: { profile, loading, _id, likes, location, unlikes },
     auth, match }) => {
     useEffect(() => {
@@ -203,10 +203,21 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
 
                 {(auth.user ? (auth.user.admin === "true") : (false)) && (
-                    <button onClick={e => banUser(profile.user?._id)}
-                        type="button" class="btn btn-danger">
-                        <i class="fas fa-ban"></i>
-                    </button>)}
+                    (profile.user ? (profile.user.ban === "false") : (false)) && (
+                        <button onClick={e => banUser(profile.user?._id)}
+                            type="button" class="btn btn-danger">
+                            <i class="fas fa-ban"> Zablokuj użytkownika</i>
+                        </button>))
+                }
+                {(auth.user ? (auth.user.admin === "true") : (false)) && (
+                    (profile.user ? (profile.user.ban === "true") : (false)) && (
+                        <button onClick={e => unbanUser(profile.user?._id)}
+                            type="button" class="btn btn-success">
+                            <i class="fas fa-check"> Odblokuj użytkownika</i>
+                        </button>))
+                }
+
+
 
 
                 <div>
@@ -239,7 +250,8 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
                     <div className="likerr">{likeerr}</div>
 
                     <a className="likeuser">Czy ten użytkownik Ci pomógł?</a>
-                    <button onClick={e => addLikeP(profile._id)} type="button" class="btn btn-light">
+
+                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (addLikeP(profile._id)) }} type="button" class="btn btn-light">
 
                         <i class="fas fa-thumbs-up"></i> {' '}
                         {profile.likes.length > 0 && (
@@ -247,7 +259,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
                         )}
 
                     </button>
-                    <button onClick={e => removeLikeP(profile._id)} type="button" class="btn btn-light">
+                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (removeLikeP(profile._id)) }} type="button" class="btn btn-light">
                         <i class="fas fa-thumbs-down"></i>
                         {profile.unlikes.length > 0 && (
                             <span>{profile.unlikes.length}</span>
@@ -257,7 +269,12 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser,
                 </Fragment>)}
                 <br></br>
                 <br></br>
-                <ProfileCommentsForm profileId={profile._id} />
+                {(auth.user ? (auth.user.ban === "false") : (false)) && (
+                    <ProfileCommentsForm profileId={profile._id} />)}
+
+                {(auth.user ? (auth.user.ban === "true") : (false)) && (
+                    <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz oceniać ani komentować.</div>)}
+
                 <div className="comments wrap">
                     {profile.comments.map(comment => (
                         <ProfileComments key={comment._id} comment={comment} profileId={profile._id} />
@@ -274,7 +291,8 @@ Profile.propTypes = {
     auth: PropTypes.object.isRequired,
     addLikeP: PropTypes.func.isRequired,
     removeLikeP: PropTypes.func.isRequired,
-    banUser: PropTypes.func.isRequired
+    banUser: PropTypes.func.isRequired,
+    unbanUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -282,4 +300,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { addLikeP, removeLikeP, getProfileById, banUser })(Profile)
+export default connect(mapStateToProps, { addLikeP, removeLikeP, getProfileById, banUser, unbanUser })(Profile)

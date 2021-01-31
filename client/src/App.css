@@ -40,6 +40,13 @@ img {
   color: #343a40;
   margin-right: 20px;
 }
+.baninfo {
+  font-size: 150%;
+  color: red;
+  margin-top: 10 px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
 .searchbtn {
   margin-top: 20px;
 }

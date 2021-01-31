@@ -82,7 +82,7 @@ const ProfileSchema = new monogoose.Schema({
       date: {
         type: Date,
         default: Date.now
-      }
+      },
     }
   ],
   likes: [

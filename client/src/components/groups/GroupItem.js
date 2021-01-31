@@ -96,13 +96,15 @@ const GroupItem = ({
                                                         Opuść grupę
                                                     </Button>
                                                 ) : (
-                                                        <Button
-                                                            onClick={e => addMember(_id)}
-                                                            type='button'
-                                                            color='olive'
-                                                        >
-                                                            Dołącz
-                                                        </Button>
+                                                        (user ? (user.ban === "false") : (false)) && (
+                                                            <Button
+                                                                onClick={e => addMember(_id)}
+                                                                type='button'
+                                                                color='olive'
+                                                            >
+                                                                Dołącz
+                                                            </Button>)
+
                                                     )}
                                             </Segment>
                                         </Grid.Column>

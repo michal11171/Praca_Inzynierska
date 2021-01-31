@@ -7,7 +7,7 @@ import { getPosts } from '../../actions/post';
 import { post } from 'request';
 import { Checkbox } from 'semantic-ui-react';
 
-const Posts = ({ getPosts, post: { posts } }) => {
+const Posts = ({ getPosts, post: { posts }, auth }) => {
     useEffect(() => {
         getPosts();
     }, [getPosts]);
@@ -35,8 +35,14 @@ const Posts = ({ getPosts, post: { posts } }) => {
                 <i className="fas fa-hammer" /> Znajdź coś dla siebie!
       </p>
 
-            <PostForm />
 
+
+
+            {(auth.user ? (auth.user.ban === "false") : (false)) && (
+                <PostForm />)}
+
+            {(auth.user ? (auth.user.ban === "true") : (false)) && (
+                <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz dodawać nowych ogłoszeń.</div>)}
 
             <div className="check">
                 <h3>Wybierz rodzaj ogłoszenia:</h3>
@@ -87,11 +93,13 @@ const Posts = ({ getPosts, post: { posts } }) => {
 
 Posts.propTypes = {
     getPosts: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    post: state.post
+    post: state.post,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, { getPosts })(Posts);

@@ -8,7 +8,7 @@ import { getGroups } from '../../actions/group'
 import { Card, Container, Header, Icon, Label, Grid, Button } from 'semantic-ui-react'
 
 
-const Group = ({ getGroups, group: { groups, loading } }) => {
+const Group = ({ getGroups, group: { groups, loading }, auth }) => {
     useEffect(() => {
         getGroups();
     }, [getGroups]);
@@ -17,9 +17,10 @@ const Group = ({ getGroups, group: { groups, loading } }) => {
         {loading ? <Spinner /> : <Fragment>
             <Container text>
                 <Grid columns='equal'>
-                    <Grid.Column width={4}>
-                        <Link to="/add-group"><Button color='green'>Stwórz własną grupę</Button></Link>
-                    </Grid.Column>
+                    {(auth.user ? (auth.user.ban === "false") : (false)) && (
+                        <Grid.Column width={4}>
+                            <Link to="/add-group"><Button color='green'>Stwórz własną grupę</Button></Link>
+                        </Grid.Column>)}
 
                 </Grid>
                 <Header as='h2' icon textAlign='center'>
@@ -44,10 +45,12 @@ const Group = ({ getGroups, group: { groups, loading } }) => {
 Group.propTypes = {
     getGroups: PropTypes.func.isRequired,
     group: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    group: state.group
+    group: state.group,
+    auth: state.auth
 })
 
 
