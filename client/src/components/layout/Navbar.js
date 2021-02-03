@@ -65,9 +65,10 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
   const guestLinks = (
     <ul>
-      <li><Link to="/profiles">Twoi potencjalni pracodawcy</Link></li>
-      <li><Link to="/register">Rejestracja</Link></li>
-      <li><Link to="/login">Logowanie</Link></li>
+      <li><Link to="/profiles"><i className="fas fa-users" />{' '}Potencjalni pracodawcy</Link></li>
+      <li><Link to="/register"><i className="fas fa-user" />{' '}Rejestracja</Link></li>
+      <li><Link to="/login"><i class="fas fa-sign-in-alt" />{' '}Logowanie</Link></li>
+
     </ul>
   );
   return (

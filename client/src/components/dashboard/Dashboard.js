@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { deleteAccount, getCurrentProfile } from '../../actions/profile';
@@ -11,12 +11,16 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
-
+    const [inp, setInp] = useState('');
     return loading && profile === null ? (<Spinner />) : (<Fragment>
         <h1 className="large text-primary">Panel użytkownika</h1>
         <p className="lead"><i className="fas fa-user"></i> Witaj {user && user.name}</p>
-        {(user ? (user.ban === "true") : (false)) && (<div class="baninfo">Twoje konto zostało zablokowane.
-            <br></br>Ograniczyliśmy także możliwość edycji Twojego profilu.</div>)}
+        {(user ? (user.ban === "true") : (false)) && (
+            <div className="baninfo">
+                <div className="ban1">Twoje konto zostało zablokowane.</div>
+                <div className="ban2">Ograniczyliśmy także możliwość edycji Twojego profilu.</div>
+            </div>
+        )}
         {profile !== null ? (
             <Fragment>
                 {(user ? (user.ban === "false") : (false)) && (
@@ -24,8 +28,8 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
                 <Experience experience={profile.experience} />
 
                 <div className="my-2">
-                    <button className="btn btn-danger" onClick={() => deleteAccount()}>
-                        <i className="fas fa-user-minus"> Usuń konto</i>
+                    <button className="btn btn-danger btn-delete" onClick={() => deleteAccount()}>
+                        <i className="fas fa-user"> Usuń konto</i>
                     </button>
                 </div>
             </Fragment>

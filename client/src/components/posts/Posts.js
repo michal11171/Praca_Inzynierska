@@ -42,7 +42,10 @@ const Posts = ({ getPosts, post: { posts }, auth }) => {
                 <PostForm />)}
 
             {(auth.user ? (auth.user.ban === "true") : (false)) && (
-                <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz dodawać nowych ogłoszeń.</div>)}
+                <div class="baninfo">
+                    <div className="ban1">Twoje konto zostało zablokowane.</div>
+                    <div className="ban2">Nie możesz dodawać nowych ogłoszeń.</div>
+                </div>)}
 
             <div className="check">
                 <h3>Wybierz rodzaj ogłoszenia:</h3>

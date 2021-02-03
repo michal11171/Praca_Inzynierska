@@ -19,7 +19,10 @@ const Post = ({ getPost, post: { post, loading }, match, auth }) => {
         {(auth.user ? (auth.user.ban === "false") : (false)) && (
             <CommentForm postId={post._id} />)}
         {(auth.user ? (auth.user.ban === "true") : (false)) && (
-            <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz dodawać komentarzy.</div>)}
+            <div class="baninfo">
+                <div className="ban1">Twoje konto zostało zablokowane.</div>
+                <div className="ban2">Nie możesz dodawać komentarzy.</div>
+            </div>)}
         <div className="comments">
             {post.comments.map(comment => (
                 <CommentItem key={comment._id} comment={comment} postId={post._id} />

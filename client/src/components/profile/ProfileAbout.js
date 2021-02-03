@@ -4,10 +4,14 @@ import PropTypes from 'prop-types'
 const ProfileAbout = ({ profile: {
     bio,
     skills,
-    user: { name }
+    user: { name, ban }
 } }) => <div class="profile-about bg-light p-2">
         {bio && (
             <Fragment>
+                { (ban ? (ban === "true") : (false)) && (
+                    <div className="profilebaninfo">
+                        Użytkownik został zablokowany za nieodpowiednie zachowanie.
+                    </div>)}
                 <h2 class="text-primary">{name.trim().split(' ')[0]} chce Ci powiedzieć coś o sobie!</h2>
                 <p>{bio}</p>
             </Fragment>

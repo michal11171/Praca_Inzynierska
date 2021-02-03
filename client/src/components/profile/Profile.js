@@ -122,7 +122,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
             <div className="searchbtn">
 
 
-                <Button onClick={async (address) => {
+                <div className="butloc"> <Button onClick={async (address) => {
                     const profloc = profile.location;
 
                     try {
@@ -149,7 +149,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
 
 
 
-                }} >Pokaż lokalizację</Button>
+                }} >Pokaż lokalizację</Button> </div>
 
 
                 <Modal
@@ -274,7 +274,10 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                     <ProfileCommentsForm profileId={profile._id} />)}
 
                 {(auth.user ? (auth.user.ban === "true") : (false)) && (
-                    <div class="baninfo">Twoje konto zostało zablokowane. Nie możesz oceniać ani komentować.</div>)}
+                    <div class="baninfo">
+                        <div className="ban1">Twoje konto zostało zablokowane.</div>
+                        <div className="ban2">Nie możesz oceniać ani komentować.</div>
+                    </div>)}
 
                 <div className="comments wrap">
                     {profile.comments.map(comment => (
