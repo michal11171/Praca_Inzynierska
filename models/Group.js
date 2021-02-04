@@ -20,6 +20,10 @@ const GroupSchema = new mongoose.Schema({
         default: false
     },
     admin: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
+    adminname: {
         type: String
     }
 });

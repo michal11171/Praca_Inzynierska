@@ -22,17 +22,17 @@ const EditGroup = ({
     });
 
     useEffect(() => {
-        getGroup(match.params.id);
-        setFormData({
-            name: loading || !group || !group.name ? '' : group.name,
-            description:
-                loading || !group || !group.description ? '' : group.description,
-            user: loading || !group || !group.user ? '' : group.user,
-            status: loading || !group || !group.status ? '' : group.status,
-            admin: loading || !group || !group.admin ? '' : group.admin
+        getGroup(match.params.id).then(() => {
+            console.log({ ...group });
+            setFormData({
+                name: '',
+                description: '',
+                user: '',
+                status: '',
+                admin: ''
+                //console.log(group);
+            });
         });
-
-        //console.log(group);
     }, [loading, getGroup, match.params.id]);
 
     const { name, description, status } = formData;
@@ -40,61 +40,57 @@ const EditGroup = ({
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    return (
-        <Fragment>
-            {group === null || loading ? (
-                <Spinner />
-            ) : (
-                    <Fragment>
-                        <h1 class='large textcustom'>Edytuj grupę</h1>
-                        <Form
-                            onSubmit={e => {
-                                e.preventDefault();
-                                editGroup(match.params.id, formData, history);
-                            }}
-                        >
-                            <Form.Field>
-                                <label>Nazwa grupy</label>
-                                <input
-                                    type='text'
-                                    placeholder="Podaj nazwę grupy"
-                                    name='name'
-                                    required
-                                    value={name}
-                                    onChange={e => onChange(e)}
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <label>Opis</label>
-                                <textarea
-                                    name='description'
-                                    cols='30'
-                                    rows='5'
-                                    placeholder="Opisz jakiego rodzaju posty będą zamieszczane na grupie"
-                                    value={description}
-                                    onChange={e => onChange(e)}
-                                ></textarea>
-                            </Form.Field>
-                            <Form.Field>
-                                <Label>
-                                    <Radio
-                                        toggle
-                                        checked={status}
-                                        value={status}
-                                        name='status'
-                                        onChange={e => {
-                                            setFormData({ ...formData, status: !status });
-                                        }}
-                                    />
-                                    <Icon circular name='key' color='blue'></Icon>Prywatna
-              </Label>
-                            </Form.Field>
-                            <Button type='submit'>Zapisz zmiany</Button>
-                        </Form>
-                    </Fragment>
-                )}
-        </Fragment>
-    );
+    return group === null || loading ? (
+        <Spinner />
+    ) : (
+            <Fragment>
+                <h1 class='large textcustom'>Edytuj grupę</h1>
+                <Form
+                    onSubmit={e => {
+                        e.preventDefault();
+                        editGroup(match.params.id, formData, history);
+                    }}
+                >
+                    <Form.Field>
+                        <label>Nazwa grupy</label>
+                        <input
+                            type='text'
+                            placeholder="Nazwa grupy"
+                            name='name'
+                            required
+                            value={name}
+                            onChange={e => onChange(e)}
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Opis</label>
+                        <textarea
+                            name='description'
+                            cols='30'
+                            rows='5'
+                            placeholder="Opisz czego będzie dotyczyć ta grupa"
+                            value={description}
+                            onChange={e => onChange(e)}
+                        ></textarea>
+                    </Form.Field>
+                    <Form.Field>
+                        <Label>
+                            <Radio
+                                toggle
+                                checked={status}
+                                value={status}
+                                name='status'
+                                onChange={e => {
+                                    setFormData({ ...formData, status: !status });
+                                }}
+                            />
+                            <Icon circular name='key' color='blue'></Icon>Prywatna
+          </Label>
+                    </Form.Field>
+                    <Button type='submit'>Zapisz</Button>
+                </Form>
+            </Fragment>
+        );
 };
 
 EditGroup.propTypes = {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { deleteAccount, getCurrentProfile } from '../../actions/profile';
@@ -11,7 +11,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth: { user }, profile: 
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
-    const [inp, setInp] = useState('');
+
     return loading && profile === null ? (<Spinner />) : (<Fragment>
         <h1 className="large text-primary">Panel użytkownika</h1>
         <p className="lead"><i className="fas fa-user"></i> Witaj {user && user.name}</p>

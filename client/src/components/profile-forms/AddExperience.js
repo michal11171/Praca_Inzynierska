@@ -71,7 +71,7 @@ const AddExperience = ({ addExperience, history }) => {
                         ></textarea>
                     </div>
                     <input type="submit" class="btn btn-primary my-1" />
-                    <a class="btn btn-light my-1" href="dashboard.html">Wróć</a>
+                    <a class="btn btn-light my-1" href="dashboard">Wróć</a>
                 </form>
             </div>
         </Fragment>

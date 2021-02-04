@@ -26,17 +26,19 @@ const AddGroup = ({
 
     const [formData, setFormData] = useState({
         name: '',
+
         description: '',
         user: '',
         status: false,
-        admin: ''
+        admin: '',
+        adminname: '',
+
     });
 
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState('');
     const [progress, setProgress] = useState(0);
 
-    const setAdmin = () => setFormData({ ...formData, admin: profile.user._id });
     //const setMember = () => setFormData({...formData, id: groupAdmin})
 
     const { name, description, user, status, admin } = formData;
@@ -44,7 +46,11 @@ const AddGroup = ({
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
-
+    const handlePhoto = e => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
+    };
 
 
 
@@ -60,7 +66,7 @@ const AddGroup = ({
                     <label>Nazwa grupy</label>
                     <input
                         type='text'
-                        placeholder="Podaj nazwę grupy"
+                        placeholder="Wpisz nazwę grupy"
                         name='name'
                         required
                         value={name}
@@ -73,7 +79,7 @@ const AddGroup = ({
                         name='description'
                         cols='30'
                         rows='5'
-                        placeholder="Opisz jakiego rodzaju posty będą zamieszczane na grupie"
+                        placeholder="Opisz czego będzie dotyczyć ta grupa"
                         value={description}
                         onChange={e => onChange(e)}
                     ></textarea>
@@ -88,12 +94,11 @@ const AddGroup = ({
                                 setFormData({ ...formData, status: !status });
                             }}
                         />
-                        <Icon circular name='key' color='blue'></Icon>Prywatna
+                        <Icon circular name='key' color='orange'></Icon>Prywatna
           </Label>
                 </Form.Field>
-
-                <Button type='submit' onClick={setAdmin}>
-                    Utwórz
+                <Button type='submit' color="green">
+                    Stwórz
         </Button>
             </Form>
         </Fragment>

@@ -16,7 +16,8 @@ import {
     Header,
     Modal,
     Button,
-    Grid
+    Grid,
+    Comment
 } from 'semantic-ui-react';
 import { deleteGroup, addMember, removeMember } from '../../actions/group';
 
@@ -27,7 +28,16 @@ const GroupItem = ({
     getProfileById,
     auth: { user },
     profile: { profile, loading },
-    group: { _id, name, status, description, members, admin, group },
+    group: {
+        _id,
+        name,
+        status,
+        description,
+        members,
+        admin,
+        adminname,
+        group
+    },
     post: { posts },
     getPosts
 }) => {
@@ -59,14 +69,14 @@ const GroupItem = ({
                     <Card.Content extra>
                         <a>
                             <Icon name='user' />
-                            {members.length} Członków
+                            {members.length} użytkowników
           </a>
                     </Card.Content>
                     <Modal
                         onClose={() => setOpen(false)}
                         onOpen={() => setOpen(true)}
                         open={open}
-                        trigger={<Button>Pokaż więcej</Button>}
+                        trigger={<Button color='orange'>Pokaż więcej</Button>}
                     >
                         <Modal.Header>{name}</Modal.Header>
                         <Modal.Content image>
@@ -75,9 +85,11 @@ const GroupItem = ({
                                     <Grid.Row stretched>
                                         <Grid.Column>
                                             <Segment vertical>
-                                                <Label color={'green'}>Admin:</Label>
+                                                <Label color={'green'}>Założyciel:</Label>
                                                 <Link to={`/profile/${admin}`}>
-                                                    <Label>Właściciel: </Label>
+                                                    <Label >
+                                                        {adminname}
+                                                    </Label>
                                                 </Link>
                                             </Segment>
 
@@ -96,15 +108,13 @@ const GroupItem = ({
                                                         Opuść grupę
                                                     </Button>
                                                 ) : (
-                                                        (user ? (user.ban === "false") : (false)) && (
-                                                            <Button
-                                                                onClick={e => addMember(_id)}
-                                                                type='button'
-                                                                color='olive'
-                                                            >
-                                                                Dołącz
-                                                            </Button>)
-
+                                                        <Button
+                                                            onClick={e => addMember(_id)}
+                                                            type='button'
+                                                            color='olive'
+                                                        >
+                                                            Dołącz
+                                                        </Button>
                                                     )}
                                             </Segment>
                                         </Grid.Column>
@@ -116,12 +126,9 @@ const GroupItem = ({
                                                     !members.find(members => members.user === user._id) ? (
                                                         <div className="boxes">
                                                             <Segment>
-
                                                                 <Header>
-
-                                                                    Grupa jest prywatna. Dołącz do niej aby zobaczyć zawartość
-                                                            </Header>
-
+                                                                    Grupa jest prywatna. Dołącz do niej aby zobaczyć treści.
+                          </Header>
                                                             </Segment>
                                                         </div>
                                                     ) : (
@@ -132,11 +139,11 @@ const GroupItem = ({
                                                                 ) ? (
                                                                         <PostForm id={_id} />
                                                                     ) : null}
-                                                                <div className='posts'>
+                                                                <Comment.Group size='massive'>
                                                                     {result.map(post => (
                                                                         <PostItem key={post._id} post={post} />
                                                                     ))}
-                                                                </div>
+                                                                </Comment.Group>
                                                             </Segment>
                                                         </div>
                                                     )}
