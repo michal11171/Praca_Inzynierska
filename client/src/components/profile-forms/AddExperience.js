@@ -45,7 +45,7 @@ const AddExperience = ({ addExperience, history }) => {
                         <input type="text" placeholder="* Firma" name="company" value={company} onChange={e => onChange(e)} required />
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Lokalizacja" name="location" value={location} onChange={e => onChange(e)} />
+                        <input type="text" placeholder="* Lokalizacja" name="location" value={location} onChange={e => onChange(e)} />
                     </div>
                     <div class="form-group">
                         <h4>Data rozpoczęcia</h4>

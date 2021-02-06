@@ -6,7 +6,8 @@ const ProfileSchema = new monogoose.Schema({
     ref: 'user'
   },
   location: {
-    type: String
+    type: String,
+    required: true
   },
   status: {
     type: String,
@@ -30,7 +31,8 @@ const ProfileSchema = new monogoose.Schema({
         required: true
       },
       location: {
-        type: String
+        type: String,
+        required: true
       },
       from: {
         type: Date,

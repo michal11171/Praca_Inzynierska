@@ -33,12 +33,16 @@ router.get('/me', auth, async (req, res) => {
 
 router.post('/', [
     auth, [
-        check('status', 'Status is required')
+        check('status', 'Status jest wymagany')
             .not()
             .isEmpty(),
-        check('skills', 'Skills is required')
+        check('location', 'Adres jest wymagany')
+            .not()
+            .isEmpty(),
+        check('skills', 'Umiejętności są wymagane')
             .not()
             .isEmpty()
+
     ]
 ],
     async (req, res) => {
@@ -159,13 +163,16 @@ router.put(
     [
         auth,
         [
-            check('title', 'Title is required')
+            check('title', 'Rodzaj pracy jest wymagany')
                 .not()
                 .isEmpty(),
-            check('company', 'Company is required')
+            check('company', 'Firma jest wymagana')
                 .not()
                 .isEmpty(),
-            check('from', 'From date is required')
+            check('location', 'Lokalizacja jest wymagana')
+                .not()
+                .isEmpty(),
+            check('from', 'Data rozpoczęcia jest wymagana')
                 .not()
                 .isEmpty(),
         ]

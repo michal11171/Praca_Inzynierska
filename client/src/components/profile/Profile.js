@@ -195,9 +195,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
     return (
         <Fragment Fragment >
             { profile === null || loading ? <Spinner /> : <Fragment>
-                <Link to='/profiles' className='btn btn-ligth'>
-                    Przeglądaj wszystkie profile
-                </Link>
+
                 {auth.isAuthenticated && auth.loading === false &&
                     auth.user?._id === profile.user?._id &&
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}

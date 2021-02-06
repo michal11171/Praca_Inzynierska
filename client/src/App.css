@@ -294,9 +294,14 @@ img {
 .badge-light {
   border: #ccc solid 1px;
 }
-
 .round-img {
   border-radius: 50%;
+}
+.round-img2 {
+  border-radius: 50%;
+  height: auto;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .line {

@@ -43,7 +43,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <div className="form-group">
             <input
               type="text"
-              placeholder="Imię"
+              placeholder="Imię i nazwisko"
               name="name"
               value={name}
               onChange={e => onChange(e)} />

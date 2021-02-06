@@ -75,9 +75,9 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                         >
                     </div>
                     <div className="form-group">
-                        <input type="text" placeholder="Miasto" name="location" value={location} onChange={e => onChange(e)} />
+                        <input type="text" placeholder="* Adres" name="location" value={location} onChange={e => onChange(e)} />
                         <small className="form-text"
-                        >Miasto w którym przebywasz</small
+                        >Adres zamieszkania</small
                         >
                     </div>
                     <div className="form-group">
