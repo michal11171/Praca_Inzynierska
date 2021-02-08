@@ -8,11 +8,11 @@ const CommentForm = ({ postId, addComment }) => {
 
 
     return (
-        <div class="post-form">
-            <div class="bg-primary p">
+        <div className="post-form">
+            <div className="bg-primary p">
                 <h3>Powiadom autora, że chcesz wykonać tę pracę!</h3>
             </div>
-            <form class="form my-1" onSubmit={e => {
+            <form className="form my-1" onSubmit={e => {
                 e.preventDefault();
                 addComment(postId, { text });
                 setText('');
@@ -26,7 +26,7 @@ const CommentForm = ({ postId, addComment }) => {
                     onChange={e => setText(e.target.value)}
                     required
                 ></textarea>
-                <input type="submit" class="btn btn-dark my-1" value="Dodaj" />
+                <input type="submit" className="btn btn-dark my-1" value="Dodaj" />
             </form>
         </div>
     )

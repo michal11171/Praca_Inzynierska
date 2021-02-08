@@ -12,11 +12,11 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
     post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites, reports },
     showActions }) => (
 
-    <div class="post bg-white p-1 my-1">
+    <div className="post bg-white p-1 my-1">
         <div>
             <Link to={`/profile/${user}`}>
                 <img
-                    class="round-img"
+                    className="round-img"
                     src={avatar}
                     alt=""
                 />
@@ -27,54 +27,54 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
         <div className="posttext">
 
             <p className="posttypes wrap" >{title}</p>
-            <p class="my-1">
+            <p className="my-1">
                 <div className="wrap">{text}</div>
             </p>
             <hr className="hrpost"></hr>
             <p className="postloc">Lokalizacja: {location}</p>
-            <p class="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
+            <p className="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
 
 
             {showActions && (<Fragment>
-                <button onClick={e => addLike(_id)} type="button" class="btn btn-light">
-                    <i class="fas fa-thumbs-up"></i> {' '}
+                <button onClick={e => addLike(_id)} type="button" className="btn btn-light">
+                    <i className="fas fa-thumbs-up"></i> {' '}
                     {likes.length > 0 && (
                         <span>{likes.length}</span>
                     )}
                 </button>
-                {/* <button onClick={e => removeLike(_id)} type="button" class="btn btn-light">
-                    <i class="fas fa-thumbs-down"></i>
+                {/* <button onClick={e => removeLike(_id)} type="button" className="btn btn-light">
+                    <i className="fas fa-thumbs-down"></i>
                 </button> */}
-                <button onClick={e => addFavourites(_id)} type="button" class="btn btn-light">
-                    <i class="fas fa-star"></i> {' '}
+                <button onClick={e => addFavourites(_id)} type="button" className="btn btn-light">
+                    <i className="fas fa-star"></i> {' '}
                     {favourites.length > 0 && (
                         <span>{favourites.length}</span>
                     )}
                 </button>
-                <Link to={`/posts/${_id}`} class="btn btn-primary">
-                    Zaaplikowało: <span class='comment-count'>{comments.length}</span>
+                <Link to={`/posts/${_id}`} className="btn btn-primary">
+                    Zaaplikowało: <span className='comment-count'>{comments.length}</span>
 
                 </Link>
                 {(!auth.loading && user === auth.user._id) && (
                     <button onClick={e => deletePost(_id)}
-                        type="button" class="btn btn-danger">
-                        <i class="fas fa-times"></i>
+                        type="button" className="btn btn-danger">
+                        <i className="fas fa-times"></i>
                     </button>
                 )}
                 {(!auth.loading && user === auth.user._id) || (auth.user ? (auth.user.admin === "true") : (false)) && (
                     <button onClick={e => deletePost(_id)}
-                        type="button" class="btn btn-danger">
-                        <i class="fas fa-times"></i>
+                        type="button" className="btn btn-danger">
+                        <i className="fas fa-times"></i>
                     </button>
                 )}
                 {!auth.loading && user !== auth.user._id && auth.user.admin === "false" && (
-                    <button onClick={e => reportPost(_id)} type="button" class="btn btn-danger">
-                        <i class="fas fa-exclamation-triangle"></i>
+                    <button onClick={e => reportPost(_id)} type="button" className="btn btn-danger">
+                        <i className="fas fa-exclamation-triangle"></i>
                     </button>
                 )}
                 {!auth.loading && auth.user.admin === "true" && reports.length > 0 && (
-                    <button onClick={e => unreportPost(_id)} type="button" class="btn btn-submit">
-                        <i class="fas fa-check"></i>
+                    <button onClick={e => unreportPost(_id)} type="button" className="btn btn-submit">
+                        <i className="fas fa-check"></i>
                     </button>
                 )}
 

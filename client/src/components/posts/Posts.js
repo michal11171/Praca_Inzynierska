@@ -42,7 +42,7 @@ const Posts = ({ getPosts, post: { posts }, auth }) => {
                 <PostForm />)}
 
             {(auth.user ? (auth.user.ban === "true") : (false)) && (
-                <div class="baninfo">
+                <div className="baninfo">
                     <div className="ban1">Twoje konto zostało zablokowane.</div>
                     <div className="ban2">Nie możesz dodawać nowych ogłoszeń.</div>
                 </div>)}
@@ -62,7 +62,7 @@ const Posts = ({ getPosts, post: { posts }, auth }) => {
             <div className='control' style={{ minWidth: "300px" }}>
                 <h3>Wyszukaj po lokalizacji:</h3>
                 <div className="filtrdiv">
-                    <input class="filtr" onChange={e => {
+                    <input className="filtr" onChange={e => {
 
                         //CaleM = alert(CaleM + mias);
                         let input = e.target.value;

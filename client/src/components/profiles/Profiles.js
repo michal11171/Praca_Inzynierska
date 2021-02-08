@@ -21,7 +21,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             <div className='control' style={{ minWidth: "300px" }}>
                 <h3>Wyszukaj po lokalizacji:</h3>
                 <div className="filtrdiv">
-                    <input class="filtr" onChange={e => {
+                    <input className="filtr" onChange={e => {
 
                         //CaleM = alert(CaleM + mias);
                         let input = e.target.value;

@@ -203,16 +203,16 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                 {(auth.user ? (auth.user.admin === "true") : (false)) && (
                     (profile.user ? (profile.user.ban === "false") : (false)) && (
                         <button onClick={e => banUser(profile.user?._id)}
-                            type="button" class="btn btn-danger">
-                            <i class="fas fa-ban"> Zablokuj</i>
+                            type="button" className="btn btn-danger">
+                            <i className="fas fa-ban"> Zablokuj</i>
                         </button>))
                 }
 
                 {(auth.user ? (auth.user.admin === "true") : (false)) && (
                     (profile.user ? (profile.user.ban === "true") : (false)) && (
                         <button onClick={e => unbanUser(profile.user?._id)}
-                            type="button" class="btn btn-success">
-                            <i class="fas fa-check"> Odblokuj</i>
+                            type="button" className="btn btn-success">
+                            <i className="fas fa-check"> Odblokuj</i>
                         </button>))
                 }
 
@@ -231,7 +231,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                 </div>
 
 
-                <div class="profile-grid my-1">
+                <div className="profile-grid my-1">
                     <ProfileTop profile={profile} />
                     <ProfileAbout profile={profile} />
                     <div className="profile-exp bg-white p-2">
@@ -250,16 +250,16 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
 
                     <a className="likeuser">Czy ten użytkownik Ci pomógł?</a>
 
-                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (addLikeP(profile._id)) }} type="button" class="btn btn-light">
+                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (addLikeP(profile._id)) }} type="button" className="btn btn-light">
 
-                        <i class="fas fa-thumbs-up"></i> {' '}
+                        <i className="fas fa-thumbs-up"></i> {' '}
                         {profile.likes.length > 0 && (
                             <span>{profile.likes.length}</span>
                         )}
 
                     </button>
-                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (removeLikeP(profile._id)) }} type="button" class="btn btn-light">
-                        <i class="fas fa-thumbs-down"></i>
+                    <button onClick={e => { (auth.user ? (auth.user.ban === "false") : (false)) && (removeLikeP(profile._id)) }} type="button" className="btn btn-light">
+                        <i className="fas fa-thumbs-down"></i>
                         {profile.unlikes.length > 0 && (
                             <span>{profile.unlikes.length}</span>
                         )}
@@ -272,7 +272,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                     <ProfileCommentsForm profileId={profile._id} />)}
 
                 {(auth.user ? (auth.user.ban === "true") : (false)) && (
-                    <div class="baninfo">
+                    <div className="baninfo">
                         <div className="ban1">Twoje konto zostało zablokowane.</div>
                         <div className="ban2">Nie możesz oceniać ani komentować.</div>
                     </div>)}

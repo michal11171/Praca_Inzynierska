@@ -44,7 +44,7 @@ const EditGroup = ({
         <Spinner />
     ) : (
             <Fragment>
-                <h1 class='large textcustom'>Edytuj grupę</h1>
+                <h1 className='large textcustom'>Edytuj grupę</h1>
                 <Form
                     onSubmit={e => {
                         e.preventDefault();

@@ -53,12 +53,13 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           <span className="hide-sm"> Panel użytkownika</span>
         </Link>
       </li>
-      <li>
-        <Link to={`/profile/${user._id}`}>
-          <i className="fas fa-user" />{' '}
-          <span className="hide-sm"> Mój profil</span>
-        </Link>
-      </li>
+      {(!!user) && (
+        <li>
+          <Link to={`/profile/${user._id}`}>
+            <i className="fas fa-user" />{' '}
+            <span className="hide-sm"> Mój profil</span>
+          </Link>
+        </li>)}
       <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt" />{' '}
@@ -73,7 +74,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
     <ul>
       <li><Link to="/profiles"><i className="fas fa-users" />{' '}Potencjalni pracodawcy</Link></li>
       <li><Link to="/register"><i className="fas fa-user" />{' '}Rejestracja</Link></li>
-      <li><Link to="/login"><i class="fas fa-sign-in-alt" />{' '}Logowanie</Link></li>
+      <li><Link to="/login"><i className="fas fa-sign-in-alt" />{' '}Logowanie</Link></li>
 
     </ul>
   );

@@ -15,11 +15,11 @@ const PostForm = ({ addPost, id }) => {
     const { text, types, title, typeOS, type } = formData;
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     return (
-        <div class="post-form">
-            <div class="bg-primary p">
+        <div className="post-form">
+            <div className="bg-primary p">
                 <h3>Dodaj ogłoszenie</h3>
             </div>
-            <form class="form my-1" onSubmit={e => {
+            <form className="form my-1" onSubmit={e => {
                 e.preventDefault();
                 if (types !== '' && typeOS !== '') {
                     addPost({ text, types, title, typeOS, type: id }); setEr(''); setFormData({
@@ -60,7 +60,7 @@ const PostForm = ({ addPost, id }) => {
                 <div className="errpost">
                     {er}
                 </div>
-                <input type="submit" class="btn btn-dark my-1" value="Dodaj" />
+                <input type="submit" className="btn btn-dark my-1" value="Dodaj" />
 
             </form>
         </div>
