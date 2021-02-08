@@ -138,10 +138,13 @@ const GroupItem = ({
                                                                     members => members.user === user._id
                                                                 ) ? (
                                                                         <PostForm id={_id} />
+
                                                                     ) : null}
-                                                                <Comment.Group size='massive'>
+                                                                <Comment.Group >
                                                                     {result.map(post => (
-                                                                        <PostItem key={post._id} post={post} />
+                                                                        <div className="grouppost">
+                                                                            <PostItem key={post._id} post={post} />
+                                                                        </div>
                                                                     ))}
                                                                 </Comment.Group>
                                                             </Segment>
@@ -153,13 +156,14 @@ const GroupItem = ({
                                 </Grid>
                             </Modal.Description>
                         </Modal.Content>
+
                         <Modal.Actions>
-                            {user._id === admin ? (
+                            {user._id === admin || user.admin === "true" ? (
                                 <Link to={`/edit-group/${_id}`} className='ui grey button'>
                                     Edytuj
                                 </Link>
                             ) : null}
-                            {user._id === admin ? (
+                            {user._id === admin || user.admin === "true" ? (
                                 <button
                                     onClick={() => deleteGroup(_id)}
                                     className='ui negative button'

@@ -35,7 +35,7 @@ router.post(
 
             //Create
             group = new Group(groupFields);
-
+            group.members.unshift({ user: req.user.id });
             await group.save();
             res.json(group);
         } catch (error) {

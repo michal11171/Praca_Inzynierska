@@ -39,8 +39,8 @@ const Group = ({ getGroups, group: { groups, loading } }) => {
                                 </Grid.Column>
                             </Grid>
                             <Header as='h2' icon textAlign='center'>
-                                <Icon name='group' circular />
-                                <Header.Content>Grupy</Header.Content>
+
+                                <Header.Content className="grupynazwa">Grupy</Header.Content>
                             </Header>
                             <Card.Group centered itemsPerRow={3}>
                                 {loading ? (

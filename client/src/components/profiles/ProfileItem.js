@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ProfileItem = ({ profile: {
-    user: { _id, name, avatar },
+    user: { _id, name, avatar, admin },
     status,
     company,
     location,
@@ -14,7 +14,7 @@ const ProfileItem = ({ profile: {
             <img src={avatar} alt="" className="round-img2" />
             <div>
                 <h2>{name}</h2>
-                <p>{status} {company && <span> w {company}</span>}</p>
+                <p>{admin !== "true" ? (status) : ("Administrator")} {company && <span> w {company}</span>}</p>
                 <p className="my-1">{location && <span>{location}</span>}</p>
                 <Link to={`/profile/${_id}`} className="btn btn-primary">
                     Zobacz profil

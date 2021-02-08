@@ -6,7 +6,7 @@ const ProfileTop = ({ profile: {
     company,
     location,
     social,
-    user: { name, avatar }
+    user: { name, avatar, admin }
 } }) => {
     return (
         <div className="profile-top bg-primary p-2">
@@ -16,7 +16,8 @@ const ProfileTop = ({ profile: {
                 alt=""
             />
             <h1 className="large">{name}</h1>
-            <p className="lead">{status} {company && <span>at {company}</span>} </p>
+            {console.log("ADMINL ", admin)}
+            <p className="lead">{admin !== "true" ? (status) : ("Administrator")} {company && <span>at {company}</span>} </p>
             <p>{location && <span>{location}</span>}</p>
             <div className="icons my-1">
                 {social && social.facebook && (

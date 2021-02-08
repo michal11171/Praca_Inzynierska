@@ -22,18 +22,24 @@ const EditGroup = ({
     });
 
     useEffect(() => {
-        getGroup(match.params.id).then(() => {
-            console.log({ ...group });
-            setFormData({
-                name: '',
-                description: '',
-                user: '',
-                status: '',
-                admin: ''
-                //console.log(group);
-            });
+        getGroup(match.params.id);
+    }, [getGroup, match.params.id]);
+
+    const setData = () => {
+        setFormData({
+            name: loading || !group.name ? '' : group.name,
+            description: loading || !group.description ? '' : group.description,
+            user: loading || !group.user ? '' : group.user,
+            status: loading || !group.status ? '' : group.status,
+            admin: loading || !group.admin ? '' : group.admin
         });
-    }, [loading, getGroup, match.params.id]);
+    };
+
+    useEffect(() => {
+        if (group !== null) setData();
+    }, [group]);
+
+    console.log(group);
 
     const { name, description, status } = formData;
 
@@ -44,7 +50,7 @@ const EditGroup = ({
         <Spinner />
     ) : (
             <Fragment>
-                <h1 className='large textcustom'>Edytuj grupę</h1>
+                <h1 class='large textcustom'>Edytuj grupę</h1>
                 <Form
                     onSubmit={e => {
                         e.preventDefault();
@@ -55,7 +61,7 @@ const EditGroup = ({
                         <label>Nazwa grupy</label>
                         <input
                             type='text'
-                            placeholder="Nazwa grupy"
+                            placeholder="Wpisz nazwę grupy"
                             name='name'
                             required
                             value={name}
@@ -87,7 +93,7 @@ const EditGroup = ({
                             <Icon circular name='key' color='blue'></Icon>Prywatna
           </Label>
                     </Form.Field>
-                    <Button type='submit'>Zapisz</Button>
+                    <Button type='submit'>Zatwierdź</Button>
                 </Form>
             </Fragment>
         );
