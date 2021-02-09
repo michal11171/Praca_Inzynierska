@@ -30,7 +30,7 @@ const Posts = ({ getPosts, post: { posts }, auth }) => {
     return (
 
         <Fragment>
-            <h1 className="large text-primary">Ogłoszenia</h1>
+            <h1 className="large text-primary">Ogłoszenia dotyczące pracy</h1>
             <p className="lead">
                 <i className="fas fa-hammer" /> Znajdź coś dla siebie!
       </p>

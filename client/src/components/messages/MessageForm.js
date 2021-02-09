@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { addComment } from '../../actions/post';
+import { addMessage } from '../../actions/message';
 
-const CommentForm = ({ postId, addComment }) => {
+const MessageForm = ({ threadId, addMessage }) => {
     const [text, setText] = useState('');
 
 
     return (
         <div className="post-form">
             <div className="bg-primary p">
-                <h3>Powiadom autora, że interesuje Cię ta oferta!</h3>
+                <h3>Napisz do tego użytkownika</h3>
             </div>
             <form className="form my-1" onSubmit={e => {
                 e.preventDefault();
-                addComment(postId, { text });
+                addMessage(threadId, { text });
                 setText('');
             }}>
                 <textarea
@@ -32,8 +32,8 @@ const CommentForm = ({ postId, addComment }) => {
     )
 }
 
-CommentForm.propTypes = {
-    addComment: PropTypes.func.isRequired
+MessageForm.propTypes = {
+    addMessage: PropTypes.func.isRequired
 }
 
-export default connect(null, { addComment })(CommentForm)
+export default connect(null, { addMessage })(MessageForm)

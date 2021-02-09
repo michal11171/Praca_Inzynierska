@@ -61,6 +61,12 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </Link>
         </li>)}
       <li>
+        <Link to={`/threads`}>
+          <i className="fas fa-envelope" />{' '}
+          <span className="hide-sm"> Wiadomości</span>
+        </Link>
+      </li>
+      <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt" />{' '}
           <span className="hide-sm">Wyloguj</span>

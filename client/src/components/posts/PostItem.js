@@ -52,7 +52,7 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                     )}
                 </button>
                 <Link to={`/posts/${_id}`} className="btn btn-primary">
-                    Zaaplikowało: <span className='comment-count'>{comments.length}</span>
+                    Skomentowało: <span className='comment-count'>{comments.length}</span>
 
                 </Link>
                 {(!auth.loading && user === auth.user._id) && (

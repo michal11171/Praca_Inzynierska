@@ -52,7 +52,7 @@ const Group = ({ getGroups, group: { groups, loading } }) => {
                                                     <GroupItem key={group._id} group={group} />
                                                 ))
                                             ) : (
-                                                    <h4>Nie znaleziono grup.</h4>
+                                                    <h4 className="groupsnotfound">Nie znaleziono grup.</h4>
                                                 )}
                                         </Fragment>
                                     )}

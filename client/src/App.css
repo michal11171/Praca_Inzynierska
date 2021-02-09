@@ -479,7 +479,9 @@ button {
 .landing img {
   filter: brightness(50%);
 }
-
+.groupsnotfound {
+  padding-bottom: 20px;
+}
 .landing-inner {
   color: #fff;
   height: 100%;

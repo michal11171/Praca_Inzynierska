@@ -27,7 +27,7 @@ import 'semantic-ui-css/semantic.min.css';
 import Groups from './components/groups/Group';
 import AddGroup from './components/groups/AddGroup';
 import EditGroup from './components/groups/EditGroup';
-
+import Threads from './components/messages/Threads';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -56,6 +56,7 @@ const App = () => {
               <PrivateRoute exact path='/edit-profile' component={EditProfile} />
               <PrivateRoute exact path='/add-experience' component={AddExperience} />
               <PrivateRoute exact path='/posts' component={Posts} />
+              <PrivateRoute exact path='/threads' component={Threads} />
               <PrivateRoute exact path='/postsO' component={PostsO} />
               <PrivateRoute exact path='/postsF' component={PostsF} />
               <PrivateRoute exact path='/postsR' component={PostsR} />
