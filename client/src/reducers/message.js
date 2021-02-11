@@ -1,22 +1,20 @@
 import {
     GET_THREADS,
-    POST_ERROR,
-    ADD_THREAD,
     GET_THREAD,
     ADD_MESSAGE,
+    THREAD_ERROR
 
 } from '../actions/types';
 
 const initialState = {
-    posts: [],
-    post: null,
+    threads: [],
+    thread: null,
     loading: true,
     error: {}
 }
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
-
     switch (type) {
         case GET_THREADS:
             return {
@@ -24,13 +22,13 @@ export default function (state = initialState, action) {
                 threads: payload,
                 loading: false
             };
-        case ADD_THREAD:
+        case GET_THREAD:
             return {
                 ...state,
-                threads: [payload, ...state.threads],
+                thread: payload,
                 loading: false
             };
-        case POST_ERROR:
+        case THREAD_ERROR:
             return {
                 ...state,
                 error: payload,
@@ -39,7 +37,7 @@ export default function (state = initialState, action) {
         case ADD_MESSAGE:
             return {
                 ...state,
-                thread: { ...state.thread, messages: payload },
+                thread: { ...state.thread, messages: [...state.thread.messages, payload] },
                 loading: false
             };
         default:

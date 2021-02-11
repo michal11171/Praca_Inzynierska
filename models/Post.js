@@ -68,6 +68,16 @@ const PostSchema = new Schema({
     location: {
         type: String
     },
+    from: {
+        type: Date,
+        required: true
+    },
+    to: {
+        type: Date
+    },
+    rate: {
+        type: String
+    },
     types: {
         type: String
     },

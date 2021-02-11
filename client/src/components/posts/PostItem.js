@@ -9,7 +9,7 @@ import post from '../../reducers/post';
 
 
 const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, deletePost, reportPost, unreportPost, auth,
-    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites, reports },
+    post: { _id, text, name, avatar, user, likes, comments, date, location, title, typeOS, favourites, reports, from, to, rate },
     showActions }) => (
 
     <div className="post bg-white p-1 my-1">
@@ -31,7 +31,11 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                 <div className="wrap">{text}</div>
             </p>
             <hr className="hrpost"></hr>
-            <p className="postloc">Lokalizacja: {location}</p>
+            <p className="postloc">
+                Lokalizacja: {location}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             Okres trwania:&nbsp; <Moment format='DD/MM/YYYY'>{from}</Moment>&nbsp; - &nbsp;<Moment format='DD/MM/YYYY'>{to}</Moment>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             Stawka: {rate}
+            </p>
             <p className="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
 
 

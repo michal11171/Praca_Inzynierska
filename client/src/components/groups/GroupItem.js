@@ -141,11 +141,19 @@ const GroupItem = ({
 
                                                                     ) : null}
                                                                 <Comment.Group >
-                                                                    {result.map(post => (
-                                                                        <div className="grouppost">
-                                                                            <PostItem key={post._id} post={post} />
-                                                                        </div>
-                                                                    ))}
+
+                                                                    {members.find(
+                                                                        members => members.user === user._id
+                                                                    ) ? (
+                                                                            result.map(post => (
+                                                                                <div className="grouppost">
+                                                                                    <PostItem key={post._id} post={post} />
+                                                                                </div>
+                                                                            ))
+
+                                                                        ) : <div>Dołącz do grupy by móc przeglądać ogłoszenia.</div>}
+
+
                                                                 </Comment.Group>
                                                             </Segment>
                                                         </div>

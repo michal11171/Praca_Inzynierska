@@ -28,6 +28,8 @@ import Groups from './components/groups/Group';
 import AddGroup from './components/groups/AddGroup';
 import EditGroup from './components/groups/EditGroup';
 import Threads from './components/messages/Threads';
+import Messages from './components/messages/Messages';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -61,9 +63,10 @@ const App = () => {
               <PrivateRoute exact path='/postsF' component={PostsF} />
               <PrivateRoute exact path='/postsR' component={PostsR} />
               <PrivateRoute exact path='/posts/:id' component={Post} />
-              <PrivateRoute exact path='/groups' component={Groups}></PrivateRoute>
-              <PrivateRoute exact path='/add-group' component={AddGroup}></PrivateRoute>
-              <PrivateRoute exact path='/edit-group/:id' component={EditGroup}></PrivateRoute>
+              <PrivateRoute exact path='/groups' component={Groups} />
+              <PrivateRoute exact path='/add-group' component={AddGroup} />
+              <PrivateRoute exact path='/edit-group/:id' component={EditGroup} />
+              <PrivateRoute exact path='/profile/:id/message' component={Messages} />
             </Switch>
           </section>
         </Fragment>

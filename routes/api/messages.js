@@ -11,12 +11,11 @@ const Thread = require('../../models/Thread');
 router.get('/threads', auth, async (req, res) => {
     try {
         let threads = await Thread.find({ user1: req.user.id });
-        threads = [...threads, Thread.find({ user2: req.user.id })]
+        threads = [...threads, ...(await Thread.find({ user2: req.user.id }))]
         res.json({ threads });
     }
 
     catch (e) {
-        console.error(e.message);
         res.status(400).send('Server Error');
     }
 });
@@ -28,7 +27,7 @@ router.post('/get_thread', auth, async (req, res) => {
     try {
         const user2Id = req.body.user2;
         let threads = await Thread.find({ user1: req.user.id, user2: user2Id });
-        threads = [...threads, Thread.find({ user1: user2Id, user2: req.user.id })];
+        threads = [...threads, ...(await Thread.find({ user1: user2Id, user2: req.user.id }))];
         let responseThread;
         if (threads.length > 0) {
             responseThread = threads[0];
@@ -40,7 +39,7 @@ router.post('/get_thread', auth, async (req, res) => {
             await thread.save();
             responseThread = thread;
         }
-        const messages = await Message.find({ threadId: responseThread._id });
+        const messages = await Message.find({ thread: responseThread._id });
         res.json({ thread: responseThread, messages });
     }
 

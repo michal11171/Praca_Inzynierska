@@ -37,6 +37,9 @@ router.post('/', [auth, [
                 title: req.body.title,
                 typeOS: req.body.typeOS,
                 type: req.body.type,
+                from: req.body.from,
+                to: req.body.to,
+                rate: req.body.rate,
                 report: "false"
             });
 

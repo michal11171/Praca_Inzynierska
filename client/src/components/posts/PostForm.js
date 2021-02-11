@@ -9,10 +9,13 @@ const PostForm = ({ addPost, id }) => {
         types: '',
         title: '',
         typeOS: '',
-        type: ''
+        type: '',
+        from: '',
+        to: '',
+        rate: ''
     });
     const [er, setEr] = useState('');
-    const { text, types, title, typeOS, type } = formData;
+    const { text, types, title, typeOS, type, from, to, rate } = formData;
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     return (
         <div className="post-form">
@@ -22,12 +25,15 @@ const PostForm = ({ addPost, id }) => {
             <form className="form my-1" onSubmit={e => {
                 e.preventDefault();
                 if (types !== '' && typeOS !== '') {
-                    addPost({ text, types, title, typeOS, type: id }); setEr(''); setFormData({
+                    addPost({ text, types, title, typeOS, type: id, from, to, rate }); setEr(''); setFormData({
                         text: '',
                         types: '',
                         title: '',
                         typeOS: '',
-                        type: ''
+                        type: '',
+                        from: '',
+                        to: '',
+                        rate: ''
                     });
                 } else { setEr("Uzupełnij czego dotyczy twoje ogłoszenie/rodzaj ogłoszenia!") }
 
@@ -45,6 +51,13 @@ const PostForm = ({ addPost, id }) => {
                     <option value="szukam">Szukam</option>
                     <option value="oferuje">Oferuję</option>
                 </select>
+                <br></br>
+
+                <input type="text" placeholder="Podaj stawkę" name="rate" value={rate} onChange={e => onChange(e)} required />
+                 Data rozpoczęcia:
+                <input type="date" name="from" value={from} onChange={e => onChange(e)} />
+                Data zakończenia:
+                <input type="date" name="to" value={to} onChange={e => onChange(e)} />
                 <br></br>
                 <input type="text" placeholder="Podaj tytuł" name="title" value={title} onChange={e => onChange(e)} required />
                 <br></br>
