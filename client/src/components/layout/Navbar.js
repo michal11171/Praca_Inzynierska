@@ -9,71 +9,85 @@ import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
 
+  const toggleNavbar = () => {
+    document.getElementById("js-menu").classList.toggle("main-nav--active");
+  }
+
   const authLinks = (
 
-    <ul>
-      <li>
-        <Link to="/profiles">
-          <i className="fas fa-users" />{' '}
+    <div>
+
+      <span class="navbar-toggle" id="js-navbar-toggle" onClick={toggleNavbar}>
+        <i class="fas fa-bars"></i>
+      </span>
+
+      <div className="main-nav" id="js-menu">
+
+        <ul>
+
+          <li>
+            <Link to="/profiles">
+              <i className="fas fa-users" />{' '}
           Użytkownicy
         </Link>
-      </li>
-      <li>
-        <Link to="/posts">
-          <i className="fas fa-hammer" />{' '}
+          </li>
+          <li>
+            <Link to="/posts">
+              <i className="fas fa-hammer" />{' '}
           Oferty pracy
         </Link>
-      </li>
-      <li>
-        <Link to="/postsO">
-          <i className="fas fa-brush" />{' '}
+          </li>
+          <li>
+            <Link to="/postsO">
+              <i className="fas fa-brush" />{' '}
           Oferty usług
         </Link>
-      </li>
-      <li><Link to='/groups'>
-        <i className="fas fa-object-group" />{' '}
+          </li>
+          <li><Link to='/groups'>
+            <i className="fas fa-object-group" />{' '}
         Grupy</Link>
-      </li>
-      <li><Link to='/postsF'>
-        <i className="fas fa-star" />{' '}
+          </li>
+          <li><Link to='/postsF'>
+            <i className="fas fa-star" />{' '}
         Ulubione</Link>
-      </li>
-      {(user ? (user.admin === "true") : (false)) && (<li><Link to='/postsR'>
-        <i className="fas fa-exclamation-triangle" />{' '}
+          </li>
+          {(user ? (user.admin === "true") : (false)) && (<li><Link to='/postsR'>
+            <i className="fas fa-exclamation-triangle" />{' '}
         Zgłoszenia</Link>
-      </li>)}
-      {(user ? (user.admin === "true") : (false)) && (<li><Link to='/bannedprofiles'>
-        <i className="fas fa-ban" />{' '}
+          </li>)}
+          {(user ? (user.admin === "true") : (false)) && (<li><Link to='/bannedprofiles'>
+            <i className="fas fa-ban" />{' '}
         Zablokowani</Link>
-      </li>)}
-
-      <li>
-        <Link to="/dashboard">
-          <i className="fas fa-user" />{' '}
-          <span className="hide-sm"> Panel użytkownika</span>
+          </li>)}
+          <li>
+            <Link to="/dashboard">
+              <i className="fas fa-user" />{' '}
+          Panel użytkownika
         </Link>
-      </li>
-      {(!!user) && (
-        <li>
-          <Link to={`/profile/${user._id}`}>
-            <i className="fas fa-user" />{' '}
-            <span className="hide-sm"> Mój profil</span>
+          </li>
+          {(!!user) && (
+            <li>
+              <Link to={`/profile/${user._id}`}>
+                <i className="fas fa-user" />{' '}
+            Mój profil
           </Link>
-        </li>)}
-      <li>
-        <Link to={`/threads`}>
-          <i className="fas fa-envelope" />{' '}
-          <span className="hide-sm"> Wiadomości</span>
+            </li>)}
+          <li>
+            <Link to={`/threads`}>
+              <i className="fas fa-envelope" />{' '}
+           Wiadomości
         </Link>
-      </li>
-      <li>
-        <a onClick={logout} href="#!">
-          <i className="fas fa-sign-out-alt" />{' '}
-          <span className="hide-sm">Wyloguj</span>
+          </li>
+          <li>
+            <a onClick={logout} href="#!">
+              <i className="fas fa-sign-out-alt" />{' '}
+          Wyloguj
         </a>
-      </li>
+          </li>
 
-    </ul>
+        </ul>
+      </div>
+    </div>
   );
 
   const guestLinks = (

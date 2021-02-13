@@ -14,7 +14,6 @@ const MessageItem = ({ auth, thread }) => {
             setThreadReceiver(thread.user1);
         }
     }, [thread]);
-
     return (
         <div className="post bg-white p-1 my-1">
             <div>

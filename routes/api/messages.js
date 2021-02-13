@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 
 const Message = require('../../models/Message');
 const Thread = require('../../models/Thread');
+const User = require('../../models/User');
 /**
  * Tutaj pobierasz liste wątków zalogowanego usera
  */

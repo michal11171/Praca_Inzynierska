@@ -486,8 +486,6 @@ button {
 .messages__wrapper {
   height: 480px;
   overflow: auto;
-  word-break: break-all;
-  overflow-wrap: break-word;
 }
 
 .message1 {
@@ -706,7 +704,12 @@ button {
   font-size: 90%;
   font-weight: 150%;
 }
-
+.active {
+  display: block;
+}
+.navbar-toggle {
+  display: none;
+}
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
@@ -739,8 +742,24 @@ button {
   .navbar ul {
     text-align: center;
     justify-content: center;
+    flex-direction: column;
   }
-
+  .main-nav {
+    list-style-type: none;
+    display: none;
+  }
+  .main-nav--active {
+    display: block;
+  }
+  .navbar-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    display: block;
+  }
   .navbar h1 {
     margin-bottom: 1rem;
   }
