@@ -1,21 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { getThread } from '../../actions/message';
 import MessageForm from './MessageForm';
 
 
-const Messages = ({ thread: { thread }, getThread, match, auth, profile }) => {
+const Messages = ({ thread: { thread }, getThread, match, auth, }) => {
     useEffect(() => {
         getThread(match.params.id);
     }, [getThread, match.params.id]);
+    const [threadReceiver, setThreadReceiver] = useState(null);
+    useEffect(() => {
+        console.log("DUPA", thread);
+        console.log("SIUR", thread?.thread.user1);
 
+        if (thread) {
+            if (thread.thread.user1._id === auth.user._id) {
+                setThreadReceiver(thread.thread.user2);
+            } else {
+                setThreadReceiver(thread.thread.user1);
+            }
+
+        }
+    }, [thread]);
 
     return (
         <div>
             <div className="messageusername">
-                {console.log("AAA", profile)}
-                Rozmowa z {profile}
+                Rozmowa z {threadReceiver?.name}
             </div>
             <div className="messages__container">
                 <div className="messages__wrapper">

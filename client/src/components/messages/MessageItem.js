@@ -17,8 +17,8 @@ const MessageItem = ({ auth, thread }) => {
     return (
         <div className="post bg-white p-1 my-1">
             <div>
-                <Link to={`/profile/${threadReceiver}/message`}>{threadReceiver}</Link>
-                <Link to={`/profile/${threadReceiver}/message`}>
+                <Link to={`/profile/${threadReceiver?._id}/message`}>{threadReceiver?.name}</Link>
+                <Link to={`/profile/${threadReceiver?._id}/message`}>
                     <img
                         className="round-img"
                         src=""

@@ -11,9 +11,11 @@ const User = require('../../models/User');
  */
 router.get('/threads', auth, async (req, res) => {
     try {
-        let threads = await Thread.find({ user1: req.user.id });
-        threads = [...threads, ...(await Thread.find({ user2: req.user.id }))]
+        let threads = await Thread.find({ user1: req.user.id }).populate('user1').populate('user2');
+        threads = [...threads, ...(await Thread.find({ user2: req.user.id }).populate('user1').populate('user2'))]
+        console.log(threads);
         res.json({ threads });
+
     }
 
     catch (e) {
@@ -27,8 +29,8 @@ router.get('/threads', auth, async (req, res) => {
 router.post('/get_thread', auth, async (req, res) => {
     try {
         const user2Id = req.body.user2;
-        let threads = await Thread.find({ user1: req.user.id, user2: user2Id });
-        threads = [...threads, ...(await Thread.find({ user1: user2Id, user2: req.user.id }))];
+        let threads = await Thread.find({ user1: req.user.id, user2: user2Id }).populate('user1').populate('user2');
+        threads = [...threads, ...(await Thread.find({ user1: user2Id, user2: req.user.id }).populate('user1').populate('user2'))];
         let responseThread;
         if (threads.length > 0) {
             responseThread = threads[0];

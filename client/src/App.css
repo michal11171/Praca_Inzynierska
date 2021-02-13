@@ -710,6 +710,7 @@ button {
 .navbar-toggle {
   display: none;
 }
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
@@ -811,5 +812,8 @@ button {
   .post a,
   .post button {
     padding: 0.3rem 0.4rem;
+  }
+  .groupitem {
+    min-width: 100px;
   }
 }

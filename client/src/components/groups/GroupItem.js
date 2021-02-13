@@ -61,7 +61,7 @@ const GroupItem = ({
     ) : (
             <Fragment>
                 <Card>
-                    <Card.Content>
+                    <Card.Content className="groupitem">
                         <Card.Header>{name}</Card.Header>
                         <Card.Meta>{status === true ? 'Prywatna' : 'Publiczna'}</Card.Meta>
                         <Card.Description>{description}</Card.Description>
