@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 const MessageItem = ({ auth, thread }) => {
     const [threadReceiver, setThreadReceiver] = useState(null);
     useEffect(() => {
-        if (thread.user1 === auth.user._id) {
+        if (thread?.user1._id === auth.user?._id) {
             setThreadReceiver(thread.user2);
-        } else {
+        } else if (thread?.user2._id === auth.user?._id) {
             setThreadReceiver(thread.user1);
         }
     }, [thread]);
@@ -32,6 +32,7 @@ const MessageItem = ({ auth, thread }) => {
                 <p className="my-1">
                     <div className="wrap">{ }</div>
                 </p>
+
                 <hr className="hrpost" />
                 <p className="post-date">Wysłano <Moment format='DD/MM/YYYY'>{ }</Moment></p>
                 {console.log()}

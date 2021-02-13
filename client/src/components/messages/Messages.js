@@ -7,12 +7,11 @@ import MessageForm from './MessageForm';
 
 const Messages = ({ thread: { thread }, getThread, match, auth, }) => {
     useEffect(() => {
+        console.log("DUPA", match.params.id);
         getThread(match.params.id);
     }, [getThread, match.params.id]);
     const [threadReceiver, setThreadReceiver] = useState(null);
     useEffect(() => {
-        console.log("DUPA", thread);
-        console.log("SIUR", thread?.thread.user1);
 
         if (thread) {
             if (thread.thread.user1._id === auth.user._id) {

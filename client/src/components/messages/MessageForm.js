@@ -12,7 +12,8 @@ const MessageForm = ({ thread, addMessage }) => {
 
             <form className="form my-1" onSubmit={e => {
                 e.preventDefault();
-                addMessage(thread.thread.thread._id, { content: text });
+                console.log("AA", thread)
+                addMessage(thread?.thread?.thread?._id, { content: text });
                 setText('');
             }}>
                 <textarea
