@@ -71,6 +71,9 @@ img {
 .filtrdiv {
   width: 30%;
 }
+.grouplabel {
+  color: #c4302b;
+}
 .errpost {
   font-size: 130%;
   padding-top: 10px;
@@ -275,7 +278,6 @@ img {
   background: var(--success-color);
   color: #fff;
 }
-
 .btn-white,
 .bg-white,
 .badge-white,
@@ -295,6 +297,10 @@ img {
 }
 .round-img {
   border-radius: 50%;
+}
+.post .round-img3 {
+  border-radius: 50%;
+  width: 30px;
 }
 .round-img2 {
   border-radius: 50%;
@@ -491,10 +497,10 @@ button {
 .message1 {
   align-self: flex-end;
   min-height: 24px;
-  text-align: center;
+  text-align: left;
   line-height: 24px;
   vertical-align: center;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
   padding: 5px 15px 5px 15px;
   border: 1px solid var(--primary-color);
@@ -503,6 +509,7 @@ button {
   margin-bottom: 10px;
   margin-right: 10px;
   max-width: 50%;
+  overflow-wrap: break-word;
 }
 .message__wrapper {
   display: flex;
@@ -516,10 +523,10 @@ button {
   max-width: 50%;
   min-height: 24px;
   border-radius: 10px;
-  text-align: center;
+  text-align: left;
   line-height: 24px;
   vertical-align: center;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
   padding: 5px 15px 5px 15px;
   border: 1px solid var(--primary-color);
@@ -527,6 +534,7 @@ button {
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
+  overflow-wrap: break-word;
 }
 .messageusername {
   text-align: center;

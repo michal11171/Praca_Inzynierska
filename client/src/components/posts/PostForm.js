@@ -53,7 +53,7 @@ const PostForm = ({ addPost, id }) => {
                 </select>
                 <br></br>
 
-                <input type="text" placeholder="Podaj stawkę" name="rate" value={rate} onChange={e => onChange(e)} required />
+                <input type="text" placeholder="Podaj stawkę" name="rate" value={rate} onChange={e => onChange(e)} />
                  Data rozpoczęcia:
                 <input type="date" name="from" value={from} onChange={e => onChange(e)} />
                 Data zakończenia:

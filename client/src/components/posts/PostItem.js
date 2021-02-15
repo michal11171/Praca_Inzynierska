@@ -33,11 +33,20 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
             <hr className="hrpost"></hr>
             <p className="postloc">
                 Lokalizacja: {location}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             Okres trwania:&nbsp; <Moment format='DD/MM/YYYY'>{from}</Moment>&nbsp; - &nbsp;<Moment format='DD/MM/YYYY'>{to}</Moment>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             Stawka: {rate}
+             Okres trwania:&nbsp;{
+                    from ? (
+                        <Moment format='DD/MM/YYYY'>{from}</Moment>) : ("Nie podano daty rozpoczęcia")
+
+                }&nbsp; - &nbsp;{
+                    to ? (
+                        <Moment format='DD/MM/YYYY'>{to}</Moment>) : ("Nie podano daty zakończenia")
+                }
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             Stawka: {
+                    rate ? (rate) : ("Brak")
+                }
             </p>
             <p className="post-date">Dodano <Moment format='DD/MM/YYYY'>{date}</Moment></p>
-
 
             {showActions && (<Fragment>
                 <button onClick={e => addLike(_id)} type="button" className="btn btn-light">

@@ -7,7 +7,6 @@ import MessageForm from './MessageForm';
 
 const Messages = ({ thread: { thread }, getThread, match, auth, }) => {
     useEffect(() => {
-        console.log("DUPA", match.params.id);
         getThread(match.params.id);
     }, [getThread, match.params.id]);
     const [threadReceiver, setThreadReceiver] = useState(null);
@@ -47,7 +46,7 @@ const Messages = ({ thread: { thread }, getThread, match, auth, }) => {
                     }) : null}
                 </div>
                 <div className="message__form">
-                    <MessageForm />
+                    <MessageForm threadReceiver={threadReceiver} />
                 </div>
             </div>
         </div>

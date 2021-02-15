@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { addMessage } from '../../actions/message';
+import { addMessage, getThread } from '../../actions/message';
 
-const MessageForm = ({ thread, addMessage }) => {
+const MessageForm = ({ thread, addMessage, threadReceiver, getThread }) => {
     const [text, setText] = useState('');
 
-
+    const handleOnSubmit = e => {
+        e.preventDefault();
+        console.log("AA", thread)
+        addMessage(thread?.thread?.thread?._id, { content: text }).then(() => {
+            getThread(threadReceiver._id);
+        });
+        setText('');
+    }
     return (
         <div className="post-form" style={{ height: '220px' }}>
 
-            <form className="form my-1" onSubmit={e => {
-                e.preventDefault();
-                console.log("AA", thread)
-                addMessage(thread?.thread?.thread?._id, { content: text });
-                setText('');
-            }}>
+            <form className="form my-1" onSubmit={handleOnSubmit}>
                 <textarea
                     name="text"
                     cols="30"
@@ -32,7 +34,8 @@ const MessageForm = ({ thread, addMessage }) => {
 }
 
 MessageForm.propTypes = {
-    addMessage: PropTypes.func.isRequired
+    addMessage: PropTypes.func.isRequired,
+    getThread: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -41,4 +44,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { addMessage })(MessageForm)
+export default connect(mapStateToProps, { addMessage, getThread })(MessageForm)

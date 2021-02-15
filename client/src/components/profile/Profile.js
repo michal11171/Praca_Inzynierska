@@ -201,7 +201,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                     (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
 
                 {(auth.user ? (auth.user.admin === "true") : (false)) && (
-                    (profile.user ? (profile.user.ban === "false") : (false)) && (
+                    (profile.user ? (profile.user.ban === "false") : (false)) && (profile.user._id !== auth.user._id) && (
                         <button onClick={e => banUser(profile.user?._id)}
                             type="button" className="btn btn-danger">
                             <i className="fas fa-ban"> Zablokuj</i>

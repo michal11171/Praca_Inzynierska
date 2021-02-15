@@ -99,6 +99,7 @@ const GroupItem = ({
                                                 <br />
                                             </Segment>
                                             <Segment vertical>
+
                                                 {members.find(members => members.user === user._id) ? (
                                                     <Button
                                                         onClick={e => removeMember(_id)}
@@ -107,6 +108,11 @@ const GroupItem = ({
                                                     >
                                                         Opuść grupę
                                                     </Button>
+                                                ) : (user.ban === "true" ? (
+                                                    <div className="baninfo">
+                                                        <div className="ban1">Twoje konto zostało zablokowane.</div>
+                                                        <div className="ban2">Nie możesz dołączyć do grupy.</div>
+                                                    </div>
                                                 ) : (
                                                         <Button
                                                             onClick={e => addMember(_id)}
@@ -115,6 +121,7 @@ const GroupItem = ({
                                                         >
                                                             Dołącz
                                                         </Button>
+                                                    )
                                                     )}
                                             </Segment>
                                         </Grid.Column>
@@ -137,7 +144,10 @@ const GroupItem = ({
                                                                 {members.find(
                                                                     members => members.user === user._id
                                                                 ) ? (
-                                                                        <PostForm id={_id} />
+                                                                        user.ban === "true" ? (<div className="baninfo">
+                                                                            <div className="ban1">Twoje konto zostało zablokowane.</div>
+                                                                            <div className="ban2">Nie możesz dodawać nowych ogłoszeń.</div>
+                                                                        </div>) : (<PostForm id={_id} />)
 
                                                                     ) : null}
                                                                 <Comment.Group >

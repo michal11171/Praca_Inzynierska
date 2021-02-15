@@ -58,7 +58,7 @@ const EditGroup = ({
                     }}
                 >
                     <Form.Field>
-                        <label>Nazwa grupy</label>
+                        <label className="grouplabel">Nazwa grupy</label>
                         <input
                             type='text'
                             placeholder="Wpisz nazwę grupy"
@@ -69,7 +69,7 @@ const EditGroup = ({
                         />
                     </Form.Field>
                     <Form.Field>
-                        <label>Opis</label>
+                        <label className="grouplabel">Opis</label>
                         <textarea
                             name='description'
                             cols='30'
@@ -80,7 +80,7 @@ const EditGroup = ({
                         ></textarea>
                     </Form.Field>
                     <Form.Field>
-                        <Label>
+                        {/* <Label>
                             <Radio
                                 toggle
                                 checked={status}
@@ -91,7 +91,7 @@ const EditGroup = ({
                                 }}
                             />
                             <Icon circular name='key' color='blue'></Icon>Prywatna
-          </Label>
+          </Label> */}
                     </Form.Field>
                     <Button type='submit'>Zatwierdź</Button>
                 </Form>

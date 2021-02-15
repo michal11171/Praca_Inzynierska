@@ -63,7 +63,7 @@ const AddGroup = ({
                 }}
             >
                 <Form.Field>
-                    <label>Nazwa grupy</label>
+                    <label className="grouplabel">Nazwa grupy</label>
                     <input
                         type='text'
                         placeholder="Wpisz nazwę grupy"
@@ -74,7 +74,7 @@ const AddGroup = ({
                     />
                 </Form.Field>
                 <Form.Field>
-                    <label>Opis</label>
+                    <label className="grouplabel">Opis</label>
                     <textarea
                         name='description'
                         cols='30'

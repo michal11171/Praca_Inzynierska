@@ -66,7 +66,7 @@ export const addMessage = (threadId, formData) => async dispatch => {
             type: ADD_MESSAGE,
             payload: res.data
         });
-        dispatch(setAlert('Pomyślnie dodano wiadomosc', 'success'));
+        // dispatch(setAlert('Pomyślnie dodano wiadomosc', 'success'));
     } catch (err) {
         dispatch({
             type: THREAD_ERROR,

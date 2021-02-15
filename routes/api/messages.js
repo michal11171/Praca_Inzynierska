@@ -13,7 +13,7 @@ router.get('/threads', auth, async (req, res) => {
     try {
         let threads = await Thread.find({ user1: req.user.id }).populate('user1').populate('user2');
         threads = [...threads, ...(await Thread.find({ user2: req.user.id }).populate('user1').populate('user2'))]
-        console.log(threads);
+
         res.json({ threads });
 
     }
@@ -32,11 +32,11 @@ router.post('/get_thread', auth, async (req, res) => {
             res.status(400).send({ statusText: "Nie mozesz psiac sam ze soba" });
             return;
         }
-        console.log(req.user.id, req.body.user2)
+
         const user2Id = req.body.user2;
         let threads = await Thread.find({ user1: req.user.id, user2: user2Id }).populate('user1').populate('user2');
         threads = [...threads, ...(await Thread.find({ user1: user2Id, user2: req.user.id }).populate('user1').populate('user2'))];
-        console.log(threads);
+
         let responseThread;
         if (threads.length > 0) {
             responseThread = threads[0];

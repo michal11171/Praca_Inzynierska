@@ -17,13 +17,15 @@ const MessageItem = ({ auth, thread }) => {
     return (
         <div className="post bg-white p-1 my-1">
             <div>
+                <img
+                    className="round-img3"
+                    src={threadReceiver?.avatar}
+                    alt=""
+                />
+                <br></br>
                 <Link to={`/profile/${threadReceiver?._id}/message`}>{threadReceiver?.name}</Link>
                 <Link to={`/profile/${threadReceiver?._id}/message`}>
-                    <img
-                        className="round-img"
-                        src=""
-                        alt=""
-                    />
+
                     <h4>{ }</h4>
                 </Link>
             </div>
@@ -34,8 +36,8 @@ const MessageItem = ({ auth, thread }) => {
                 </p>
 
                 <hr className="hrpost" />
-                <p className="post-date">Wysłano <Moment format='DD/MM/YYYY'>{ }</Moment></p>
-                {console.log()}
+                <p className="post-date">Rozpoczęto rozmowę w dniu: <Moment format='DD/MM/YYYY'>{ }</Moment></p>
+
 
             </div>
         </div>
