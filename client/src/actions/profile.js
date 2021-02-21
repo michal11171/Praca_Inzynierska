@@ -17,7 +17,7 @@ import {
     UPDATE_USER
 } from './types';
 
-//Get current users profile
+
 export const getCurrentProfile = () => async dispatch => {
     try {
         const res = await axios.get('/api/profile/me');
@@ -34,7 +34,7 @@ export const getCurrentProfile = () => async dispatch => {
     }
 };
 
-// Get all profiles
+
 export const getProfiles = () => async dispatch => {
     dispatch({ type: CLEAR_PROFILE });
     try {
@@ -52,7 +52,7 @@ export const getProfiles = () => async dispatch => {
     }
 };
 
-// Get profile by ID
+
 export const getProfileById = userId => async dispatch => {
     try {
         const res = await axios.get(`/api/profile/user/${userId}`);
@@ -69,7 +69,7 @@ export const getProfileById = userId => async dispatch => {
     }
 };
 
-//Create or update profile
+
 export const createProfile = (formData, history, edit = false) => async dispatch => {
     try {
         const config = {
@@ -104,7 +104,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 };
 
-//Add experience
+
 export const addExperience = (formData, history) => async dispatch => {
     try {
         const config = {
@@ -137,7 +137,7 @@ export const addExperience = (formData, history) => async dispatch => {
     }
 };
 
-// Delete experience
+
 export const deleteExperience = id => async dispatch => {
     try {
         const res = await axios.delete(`/api/profile/experience/${id}`);
@@ -155,7 +155,7 @@ export const deleteExperience = id => async dispatch => {
     }
 };
 
-//Dekete account & profile
+
 
 export const deleteAccount = () => async dispatch => {
     if (window.confirm('Jesteś pewien? Twoje konto nie będzie mogło zostać przywrócone.')) {
@@ -176,7 +176,7 @@ export const deleteAccount = () => async dispatch => {
 
 };
 
-//Add comment
+
 export const addComment = (profileId, formData) => async dispatch => {
     const config = {
         headers: {
@@ -199,7 +199,7 @@ export const addComment = (profileId, formData) => async dispatch => {
         });
     }
 };
-//Delete comment
+
 export const deleteComment = (profileId, commentId) => async dispatch => {
 
     try {
@@ -217,7 +217,7 @@ export const deleteComment = (profileId, commentId) => async dispatch => {
         });
     }
 };
-//Add like
+
 export const addLikeP = id => async dispatch => {
     try {
         const res = await axios.put(`/api/profile/like/${id}`);
@@ -234,7 +234,7 @@ export const addLikeP = id => async dispatch => {
     }
 };
 
-//Unlike
+
 export const removeLikeP = id => async dispatch => {
     try {
         const res = await axios.put(`/api/profile/unlike/${id}`);
@@ -244,10 +244,6 @@ export const removeLikeP = id => async dispatch => {
             payload: { id, unlikes: res.data }
         });
 
-        // dispatch({
-        //     type: UPDATE_LIKESC,
-        //     payload: { id, likes: res.data }
-        // });
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -256,7 +252,7 @@ export const removeLikeP = id => async dispatch => {
     }
 };
 
-//Ban user
+
 export const banUser = id => async dispatch => {
     try {
         const res = await axios.put(`/api/users/ban/${id}`);
@@ -273,7 +269,7 @@ export const banUser = id => async dispatch => {
         });
     }
 };
-//Unban User
+
 export const unbanUser = id => async dispatch => {
     try {
         const res = await axios.put(`/api/users/unban/${id}`);

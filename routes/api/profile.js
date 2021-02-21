@@ -8,9 +8,7 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const { compare } = require('bcryptjs');
 
-// @route   GET api/profile/me
-// @desc    Get current users profile
-// @access  Private
+
 router.get('/me', auth, async (req, res) => {
     try {
         const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar', 'ban', 'admin']);
@@ -27,9 +25,7 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
-// @route   POST api/profile
-// @desc    Create or update user profile
-// @access  Private
+
 
 router.post('/', [
     auth, [
@@ -61,7 +57,7 @@ router.post('/', [
             linkedin
         } = req.body;
 
-        //build profile object
+
         const profileFields = {};
         profileFields.user = req.user.id;
         if (location) profileFields.location = location;
@@ -71,7 +67,7 @@ router.post('/', [
             profileFields.skills = skills.split(',').map(skill => skill.trim());
         }
 
-        //build social object
+
         profileFields.social = {};
         if (twitter) profileFields.social.twitter = twitter;
         if (facebook) profileFields.social.facebook = facebook;
@@ -81,7 +77,7 @@ router.post('/', [
             let profile = await Profile.findOne({ user: req.user.id });
 
             if (profile) {
-                //Update
+
                 profile = await Profile.findOneAndUpdate(
                     { user: req.user.id },
                     { $set: profileFields },
@@ -91,7 +87,7 @@ router.post('/', [
                 return res.json(profile);
             }
 
-            //Create
+
             profile = new Profile(profileFields);
 
             await profile.save();
@@ -103,9 +99,7 @@ router.post('/', [
 
     });
 
-// @route   GET api/profile
-// @desc    Get all profiles
-// @access  Public
+
 router.get('/', async (req, res) => {
     try {
         const profiles = await Profile.find().populate('user', ['name', 'avatar', 'ban', 'admin']);
@@ -116,9 +110,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-// @route   GET api/profile/user/:user_id
-// @desc    Get all profile by user ID
-// @access  Public
+
 router.get('/user/:user_id', async (req, res) => {
     try {
         const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar', 'ban', 'admin']);
@@ -135,16 +127,14 @@ router.get('/user/:user_id', async (req, res) => {
     }
 })
 
-// @route   DELETE api/profile
-// @desc    Delete profile, user and posts
-// @access  Private
+
 router.delete('/', auth, async (req, res) => {
     try {
-        //Remove user posts
+
         await Post.deleteMany({ user: req.user.id });
-        //Remove profile
+
         await Profile.findOneAndRemove({ user: req.user.id });
-        //Remove user
+
         await User.findOneAndRemove({ _id: req.user.id });
 
         res.json({ msg: 'User deleted' });
@@ -154,9 +144,7 @@ router.delete('/', auth, async (req, res) => {
     }
 })
 
-// @route   PUT api/profile/experience
-// @desc    Add profile experience
-// @access  Private
+
 
 router.put(
     '/experience',
@@ -214,15 +202,13 @@ router.put(
         }
     });
 
-// @route   DELETE api/profile/experience/:exp_id
-// @desc    Delete one of profile experiences
-// @access  Private
+
 
 router.delete('/experience/:exp_id', auth, async (req, res) => {
     try {
         const profile = await Profile.findOne({ user: req.user.id });
 
-        // Get remove index
+
         const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
         profile.experience.splice(removeIndex, 1);
         await profile.save();
@@ -233,9 +219,7 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-// @route   POST api/profile/commentP/:id
-// @desc    Comment on a post
-// @access  Private
+
 router.post('/commentP/:id', [auth, [
     check('text', 'Text is required')
         .not()
@@ -270,22 +254,20 @@ router.post('/commentP/:id', [auth, [
         }
 
     });
-// @route   DELETE api/profile/commentP/:id/:comment_id
-// @desc    Delete comment
-// @access  Private
+
 router.delete('/commentP/:id/:comment_id', auth, async (req, res) => {
     try {
         const profile = await Profile.findById(req.params.id);
         const user = await User.findById(req.user.id);
 
-        // Pull out comment
+
         const comment = profile.comments.find(comment => comment.id === req.params.comment_id);
-        //Make sure comment exist
+
         if (!comment) {
             return res.status(404).json({ msg: 'Comment does not exist' });
         }
 
-        //Check if user is author of the comment
+
         if (comment.user.toString() !== req.user.id) {
             if (user.admin === "true") {
                 const removeIndex = profile.comments.map(comment => comment.user.toString()).indexOf(req.user.id);
@@ -299,7 +281,7 @@ router.delete('/commentP/:id/:comment_id', auth, async (req, res) => {
             }
 
         }
-        //Get remove index
+
         const removeIndex = profile.comments.map(comment => comment.user.toString()).indexOf(req.user.id);
         profile.comments.splice(removeIndex, 1);
 
@@ -310,13 +292,11 @@ router.delete('/commentP/:id/:comment_id', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-// @route   PUT api/profile/like/:id
-// @desc    Like a profile
-// @access  Private
+
 router.put('/like/:id', auth, async (req, res) => {
     try {
         const profile = await Profile.findById(req.params.id);
-        //Check if profile has already been liked  
+
         if (profile.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
             const removeIndex = profile.likes.map(like => like.user.toString()).indexOf(req.user.id);
             profile.likes.splice(removeIndex, 1);
@@ -343,13 +323,11 @@ router.put('/like/:id', auth, async (req, res) => {
     }
 });
 
-// @route   PUT api/profile/unlike/:id
-// @desc    Unlike a profile
-// @access  Private
+
 router.put('/unlike/:id', auth, async (req, res) => {
     try {
         const profile = await Profile.findById(req.params.id);
-        //Check if profile has already been liked  
+
         if (profile.unlikes.filter(unlike => unlike.user.toString() === req.user.id).length > 0) {
             const removeIndex = profile.unlikes.map(unlike => unlike.user.toString()).indexOf(req.user.id);
             profile.unlikes.splice(removeIndex, 1);
@@ -377,9 +355,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
     }
 });
 
-// @route   GET api/profile/likes/:user_id
-// @desc    Get all likes by profile ID
-// @access  Public
+
 router.get('/likes/:user_id', async (req, res) => {
     try {
         const profile = await Profile.findOne({ user: req.params.user_id }).populate('likes');

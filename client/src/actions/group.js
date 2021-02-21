@@ -10,7 +10,7 @@ import {
     UPDATE_MEMBERS
 } from './types';
 
-//Get groups
+
 export const getGroups = () => async dispatch => {
     dispatch({ type: CLEAR_GROUP });
     try {
@@ -28,7 +28,7 @@ export const getGroups = () => async dispatch => {
     }
 };
 
-// Get group
+
 export const getGroup = id => async dispatch => {
     try {
         const res = await axios.get(`/api/group/${id}`);
@@ -44,7 +44,7 @@ export const getGroup = id => async dispatch => {
     }
 };
 
-// Delete group
+
 export const deleteGroup = id => async dispatch => {
     try {
         await axios.delete(`/api/group/${id}`);
@@ -63,7 +63,7 @@ export const deleteGroup = id => async dispatch => {
     }
 };
 
-// Add group
+
 export const addGroup = formData => async dispatch => {
     const config = {
         headers: {
@@ -88,7 +88,7 @@ export const addGroup = formData => async dispatch => {
     }
 };
 
-//Add group member
+
 export const addMember = id => async dispatch => {
     try {
         const res = await axios.put(`/api/group/members/${id}`);
@@ -105,7 +105,7 @@ export const addMember = id => async dispatch => {
     }
 };
 
-//Remove group member
+
 export const removeMember = id => async dispatch => {
     try {
         const res = await axios.put(`/api/group/leave/${id}`);
@@ -122,7 +122,7 @@ export const removeMember = id => async dispatch => {
     }
 };
 
-// Edit Group
+
 export const editGroup = (groupId, formData, history) => async dispatch => {
     try {
         const config = {

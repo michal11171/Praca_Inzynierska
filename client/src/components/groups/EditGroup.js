@@ -80,18 +80,7 @@ const EditGroup = ({
                         ></textarea>
                     </Form.Field>
                     <Form.Field>
-                        {/* <Label>
-                            <Radio
-                                toggle
-                                checked={status}
-                                value={status}
-                                name='status'
-                                onChange={e => {
-                                    setFormData({ ...formData, status: !status });
-                                }}
-                            />
-                            <Icon circular name='key' color='blue'></Icon>Prywatna
-          </Label> */}
+
                     </Form.Field>
                     <Button type='submit'>Zatwierdź</Button>
                 </Form>

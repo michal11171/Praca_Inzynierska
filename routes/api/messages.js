@@ -6,9 +6,7 @@ const { check, validationResult } = require('express-validator');
 const Message = require('../../models/Message');
 const Thread = require('../../models/Thread');
 const User = require('../../models/User');
-/**
- * Tutaj pobierasz liste wątków zalogowanego usera
- */
+
 router.get('/threads', auth, async (req, res) => {
     try {
         let threads = await Thread.find({ user1: req.user.id }).populate('user1').populate('user2');
@@ -23,13 +21,11 @@ router.get('/threads', auth, async (req, res) => {
     }
 });
 
-/**
- *  Tutaj szukasz wątu między dwoma użytkownikami, jeżeli go nie ma to go tworzysz
- */
+
 router.post('/get_thread', auth, async (req, res) => {
     try {
         if (req.user.id === req.body.user2) {
-            res.status(400).send({ statusText: "Nie mozesz psiac sam ze soba" });
+            res.status(400).send({ statusText: "Nie mozesz pisac sam ze soba" });
             return;
         }
 
@@ -59,9 +55,7 @@ router.post('/get_thread', auth, async (req, res) => {
     }
 });
 
-/**
- * A tu wysyłasz wiadomość mordeczko
- */
+
 router.post('/send/:threadId', auth, async (req, res) => {
     try {
         const messageBody = req.body;

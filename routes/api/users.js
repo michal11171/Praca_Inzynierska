@@ -9,11 +9,9 @@ const auth = require('../../middleware/auth');
 
 const User = require('../../models/User');
 
-// @route   POST api/users
-// @desc    Register user
-// @access  Public
+
 router.post('/', [
-    check('name', 'Imię jest wymagane')
+    check('name', 'Imię i nazwisko jest wymagane')
         .not()
         .isEmpty(),
     check('email', 'Wprowadź poprawny email').isEmail(),
@@ -80,9 +78,7 @@ router.post('/', [
 
 
     });
-// @route   PUT api/users/ban/:id
-// @desc    Ban user
-// @access  Private
+
 router.put('/ban/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -97,9 +93,7 @@ router.put('/ban/:id', auth, async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-// @route   PUT api/users/unban/:id
-// @desc    Unan user
-// @access  Private
+
 router.put('/unban/:id', auth, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);

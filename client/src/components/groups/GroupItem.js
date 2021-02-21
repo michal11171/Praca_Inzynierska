@@ -49,10 +49,9 @@ const GroupItem = ({
         getPosts();
     }, [getPosts]);
 
-    //Show only posts of this group
+
     const result = posts.filter(post => post.type === _id);
 
-    //const resultM = members.filter(group => group.members === user._id )
 
     const [open, setOpen] = React.useState(false);
 

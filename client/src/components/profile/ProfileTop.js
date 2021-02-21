@@ -10,9 +10,10 @@ const ProfileTop = ({ profile: {
     user: { name, avatar, admin, _id }
 } }) => {
     return (
+
         <div className="profile-top bg-primary p-2">
             <Link to={`/profile/${_id}/message`}>
-                <button className="btn btn-default btn-circle"><i className="fas fa-envelope" /></button>
+                <button className="btn btn-default btn-circle"><i className="fas fa-envelope" />Wyślij wiadomość</button>
             </Link>
             <img
                 className="round-img my-1"

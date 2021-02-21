@@ -81,8 +81,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
 
     if (loadError) return "Error loading maps";
     if (!isLoaded) return "Loading Maps";
-    //const lokalizacja = profile.location;
-    //console.log("Lokalizacja:", profile.location);
+
 
     function exampleReducer(state, action) {
         switch (action.type) {
@@ -196,9 +195,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
         <Fragment Fragment >
             { profile === null || loading ? <Spinner /> : <Fragment>
 
-                {auth.isAuthenticated && auth.loading === false &&
-                    auth.user?._id === profile.user?._id &&
-                    (<Link to="/edit-profile" className="btn btn-dark">Edytuj profil</Link>)}
+
 
                 {(auth.user ? (auth.user.admin === "true") : (false)) && (
                     (profile.user ? (profile.user.ban === "false") : (false)) && (profile.user._id !== auth.user._id) && (
@@ -222,12 +219,7 @@ const Profile = ({ addLikeP, removeLikeP, getProfileById, banUser, unbanUser,
                 <div>
 
                     <Search moveTo={moveTo} />
-                    {/* <GoogleMap
-                        mapContainerStyle={mapContainerStyle}
-                        zoom={14}
-                        center={center}
 
-                    ></GoogleMap> */}
                 </div>
 
 

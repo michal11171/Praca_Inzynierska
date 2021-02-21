@@ -36,37 +36,6 @@ const PostsR = ({ getPosts, post: { posts }, auth: { user } }) => {
 
 
 
-            {/* <div className="check">
-                <h3>Wybierz rodzaj ogłoszenia:</h3>
-                <input type="radio" id="wszystko" name="szukam" value="wszystko" onClick={e => { setRodzaj(e.target.value) }}></input>
-                <label for="wszystko"> Wszystkie ogłoszenia</label> <br></br>
-                <input type="radio" id="szukam" name="szukam" value="szukam" onClick={e => { setRodzaj(e.target.value) }}></input>
-                <label for="szukam"> Szukam</label> <br></br>
-                <input type="radio" id="oferuje" name="szukam" value="oferuje" onClick={e => { setRodzaj(e.target.value) }}></input>
-                <label for="oferuje"> Oferuję</label>
-            </div>
-
-            <div className='control' style={{ minWidth: "300px" }}>
-                <h3>Wyszukaj po lokalizacji:</h3>
-                <div className="filtrdiv">
-                    <input className="filtr" onChange={e => {
-
-                        //CaleM = alert(CaleM + mias);
-                        let input = e.target.value;
-                        setMias(input);
-                        setInp(input);
-
-
-                        // {
-                        //     result.map((post) => (
-                        //         <PostItem key={post._id} post={post} />
-                        //     ))
-                        // }
-                        setMias(miasta);
-                    }} style={{ width: "100%" }} placeholder='Wpisz nazwę miasta' type='text' />
-                </div>
-            </div> */}
-
 
             <div className="posts">
                 {miasta.map((post) => (

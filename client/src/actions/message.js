@@ -7,7 +7,7 @@ import {
     GET_THREAD
 } from './types';
 
-//Get threads
+
 export const getThreads = () => async dispatch => {
     try {
         const res = await axios.get('api/messages/threads');
@@ -27,7 +27,6 @@ export const getThreads = () => async dispatch => {
 
 
 
-//Add thread
 export const getThread = (user2) => async dispatch => {
     const config = {
         headers: {
@@ -42,7 +41,7 @@ export const getThread = (user2) => async dispatch => {
             type: GET_THREAD,
             payload: res.data
         });
-        // dispatch(setAlert('Pomyślnie dodano wątek', 'success'));
+
     } catch (err) {
         dispatch({
             type: THREAD_ERROR,
@@ -51,7 +50,7 @@ export const getThread = (user2) => async dispatch => {
     }
 };
 
-//Add message
+
 export const addMessage = (threadId, formData) => async dispatch => {
     const config = {
         headers: {
@@ -66,7 +65,7 @@ export const addMessage = (threadId, formData) => async dispatch => {
             type: ADD_MESSAGE,
             payload: res.data
         });
-        // dispatch(setAlert('Pomyślnie dodano wiadomosc', 'success'));
+
     } catch (err) {
         dispatch({
             type: THREAD_ERROR,

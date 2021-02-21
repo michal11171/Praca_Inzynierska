@@ -5,9 +5,6 @@ const { check, validationResult } = require('express-validator');
 
 const Group = require('../../models/Group');
 
-// group api/group
-// Create or update a group
-// Private
 router.post(
     '/',
     [auth, [check('name', 'Name is required').not().isEmpty()]],
@@ -21,7 +18,7 @@ router.post(
 
         const user = await User.findById(req.user.id).select("-password");
 
-        //Build group object
+
         const groupFields = {};
 
         if (name) groupFields.name = name;
@@ -33,7 +30,7 @@ router.post(
         try {
             let group = await Group.findOne({ user: req.user.id });
 
-            //Create
+
             group = new Group(groupFields);
             group.members.unshift({ user: req.user.id });
             await group.save();
@@ -45,9 +42,7 @@ router.post(
     }
 );
 
-// GET api/group
-// Get all groups
-// Public
+
 router.get('/', async (req, res) => {
     try {
         const groups = await Group.find().populate('user', ['name']);
@@ -58,9 +53,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET api/group/:group_id
-// Get group by group ID
-// Public
+
 router.get('/:group_id', async (req, res) => {
     try {
         const group = await Group.findOne({
@@ -79,9 +72,7 @@ router.get('/:group_id', async (req, res) => {
     }
 });
 
-// DELETE api/group/:group_id
-// Delete group by group ID
-// Private
+
 router.delete('/:group_id', auth, async (req, res) => {
     try {
         await Group.findOneAndRemove({ _id: req.params.group_id });
@@ -93,9 +84,7 @@ router.delete('/:group_id', auth, async (req, res) => {
     }
 });
 
-// PUT api/group/members
-// Add members to group
-// Private
+
 router.put('/members/:id', auth, async (req, res) => {
     try {
         const group = await Group.findById(req.params.id);
@@ -118,9 +107,7 @@ router.put('/members/:id', auth, async (req, res) => {
     }
 });
 
-// PUT api/group/leave
-// Delete members to group
-// Private
+
 router.put('/leave/:id', auth, async (req, res) => {
     try {
         const group = await Group.findById(req.params.id);
@@ -147,9 +134,7 @@ router.put('/leave/:id', auth, async (req, res) => {
     }
 });
 
-// group api/group
-// Create or update a group
-// Private
+
 router.put(
     '/:group_id',
     [auth, [check('name', 'Name is required').not().isEmpty()]],
@@ -161,7 +146,7 @@ router.put(
 
         const { name, description, members, status, admin } = req.body;
 
-        //Build group object
+
         const groupFields = {};
 
         if (name) groupFields.name = name;

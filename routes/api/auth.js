@@ -6,9 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
-// @route   GET api/auth
-// @desc    Test route
-// @access  Public
+
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -19,9 +17,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// @route   POST api/auth
-// @desc    Login user
-// @access  Public
+
 router.post('/', [
     check('email', 'Wprowadź poprawny email').isEmail(),
     check('password', 'Hasło jest wymagane').exists()

@@ -15,7 +15,7 @@ import {
     UPDATE_REPORTS
 } from './types';
 
-//Get posts
+
 export const getPosts = () => async dispatch => {
     try {
         const res = await axios.get('api/posts');
@@ -32,7 +32,7 @@ export const getPosts = () => async dispatch => {
     }
 };
 
-//Add like
+
 export const addLike = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/like/${id}`);
@@ -49,7 +49,7 @@ export const addLike = id => async dispatch => {
     }
 };
 
-//Remove like
+
 export const removeLike = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/unlike/${id}`);
@@ -66,7 +66,7 @@ export const removeLike = id => async dispatch => {
     }
 };
 
-//Delete post
+
 export const deletePost = id => async dispatch => {
     try {
         const res = await axios.delete(`api/posts/${id}`);
@@ -84,7 +84,7 @@ export const deletePost = id => async dispatch => {
     }
 };
 
-//Add post
+
 export const addPost = formData => async dispatch => {
     const config = {
         headers: {
@@ -108,7 +108,7 @@ export const addPost = formData => async dispatch => {
     }
 };
 
-//Get post
+
 export const getPost = id => async dispatch => {
     try {
         const res = await axios.get(`/api/posts/${id}`);
@@ -125,7 +125,7 @@ export const getPost = id => async dispatch => {
     }
 };
 
-//Add comment
+
 export const addComment = (postId, formData) => async dispatch => {
     const config = {
         headers: {
@@ -149,7 +149,7 @@ export const addComment = (postId, formData) => async dispatch => {
     }
 };
 
-//Delete comment
+
 export const deleteComment = (postId, commentId) => async dispatch => {
 
     try {
@@ -167,7 +167,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
         });
     }
 };
-//Add to favourites
+
 export const addFavourites = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/favourite/${id}`);
@@ -184,7 +184,7 @@ export const addFavourites = id => async dispatch => {
     }
 };
 
-//Remove from favourites
+
 export const removeFavourites = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/unfavourite/${id}`);
@@ -201,7 +201,7 @@ export const removeFavourites = id => async dispatch => {
     }
 };
 
-//Report post
+
 export const reportPost = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/report/${id}`);
@@ -217,7 +217,7 @@ export const reportPost = id => async dispatch => {
         });
     }
 };
-//Remove report
+
 export const unreportPost = id => async dispatch => {
     try {
         const res = await axios.put(`api/posts/unreport/${id}`);
@@ -233,7 +233,7 @@ export const unreportPost = id => async dispatch => {
         });
     }
 };
-//Filter by location
+
 export const filterByValue = payload => ({
     type: FILTER_BY_VALUE,
     payload

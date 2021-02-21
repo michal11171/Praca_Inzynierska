@@ -12,16 +12,7 @@ const Threads = ({ getThreads, thread: { threads }, auth }) => {
     return (
 
         <Fragment>
-            <h1 className="large text-primary">Rozmowy</h1>
-            <p className="lead">
-                <i className="fas fa-hammer" /> Wiadomosci
-            </p>
-            {(auth.user ? (auth.user.ban === "true") : false) && (
-                <div className="baninfo">
-                    <div className="ban1">Twoje konto zostało zablokowane.</div>
-                    <div className="ban2">Nie możesz dodawać nowych ogłoszeń.</div>
-                </div>)}
-
+            <h1 className="large text-primary">Wiadomości</h1>
             <div className="posts">
                 {threads ? threads.map((thread) => (
                     <MessageItem key={thread._id} thread={thread} />

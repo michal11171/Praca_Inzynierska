@@ -13,7 +13,7 @@ import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
 
-//Load User
+
 export const loadUser = () => async dispatch => {
     if (localStorage.token) {
         setAuthToken(localStorage.token);
@@ -35,7 +35,7 @@ export const loadUser = () => async dispatch => {
 }
 
 
-//Register User
+
 export const register = ({ name, email, password }) => async dispatch => {
     const config = {
         headers: {
@@ -66,7 +66,7 @@ export const register = ({ name, email, password }) => async dispatch => {
 
 };
 
-//Login User
+
 export const login = (email, password) => async dispatch => {
     const config = {
         headers: {
@@ -98,7 +98,7 @@ export const login = (email, password) => async dispatch => {
 
 };
 
-//LOGOUT
+
 export const logout = () => dispatch => {
     dispatch({ type: CLEAR_PROFILE });
     dispatch({ type: LOGOUT });

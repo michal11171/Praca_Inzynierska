@@ -52,13 +52,6 @@ const Messages = ({ thread: { thread }, getThread, match, auth, }) => {
         </div>
     )
 }
-//
-// Messages.propTypes = {
-//     getThreads: PropTypes.func.isRequired,
-//     deleteAccount: PropTypes.func.isRequired,
-//     auth: PropTypes.object.isRequired,
-//     profile: PropTypes.object.isRequired
-// };
 
 const mapStateToProps = state => ({
     auth: state.auth,

@@ -55,9 +55,6 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                         <span>{likes.length}</span>
                     )}
                 </button>
-                {/* <button onClick={e => removeLike(_id)} type="button" className="btn btn-light">
-                    <i className="fas fa-thumbs-down"></i>
-                </button> */}
                 <button onClick={e => addFavourites(_id)} type="button" className="btn btn-light">
                     <i className="fas fa-star"></i> {' '}
                     {favourites.length > 0 && (

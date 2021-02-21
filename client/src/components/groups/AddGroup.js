@@ -85,17 +85,6 @@ const AddGroup = ({
                     ></textarea>
                 </Form.Field>
                 <Form.Field>
-                    {/* <Label>
-                        <Checkbox
-                            toggle
-                            value={status}
-                            name='status'
-                            onChange={e => {
-                                setFormData({ ...formData, status: !status });
-                            }}
-                        />
-                        <Icon circular name='key' color='orange'></Icon>Prywatna
-          </Label> */}
                 </Form.Field>
                 <Button type='submit' color="green">
                     Stwórz

@@ -493,7 +493,8 @@ button {
   height: 480px;
   overflow: auto;
 }
-
+.bangr {
+}
 .message1 {
   align-self: flex-end;
   min-height: 24px;
