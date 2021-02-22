@@ -21,7 +21,7 @@ const ProfileTop = ({ profile: {
                 alt=""
             />
             <h1 className="large">{name}</h1>
-            {console.log("ADMINL ", admin)}
+
             <p className="lead">{admin !== "true" ? (status) : ("Administrator")} {company && <span>at {company}</span>} </p>
             <p>{location && <span>{location}</span>}</p>
             <div className="icons my-1">

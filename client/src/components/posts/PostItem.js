@@ -80,7 +80,7 @@ const PostItem = ({ addLike, removeLike, addFavourites, removeFavourites, delete
                 {!auth.loading && user !== auth.user._id && auth.user.admin === "false" && !reports.find(report => report.user === auth.user._id) && (
                     <button onClick={e => reportPost(_id)} type="button" className="btn btn-danger">
 
-                        {console.log()}
+
                         <i className="fas fa-exclamation-triangle"></i>
                     </button>
                 )}

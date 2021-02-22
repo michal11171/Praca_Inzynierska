@@ -8,7 +8,7 @@ const MessageForm = ({ thread, addMessage, threadReceiver, getThread }) => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
-        console.log("AA", thread)
+
         addMessage(thread?.thread?.thread?._id, { content: text }).then(() => {
             getThread(threadReceiver._id);
         });

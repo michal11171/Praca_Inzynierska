@@ -17,7 +17,7 @@ export const getThreads = () => async dispatch => {
             payload: res.data && res.data.threads ? res.data.threads : []
         });
     } catch (err) {
-        console.log('tu', err);
+
         dispatch({
             type: THREAD_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }

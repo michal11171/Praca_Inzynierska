@@ -307,7 +307,7 @@ router.put('/like/:id', auth, async (req, res) => {
         else {
 
             if (profile.unlikes.filter(unlike => unlike.user.toString() === req.user.id).length > 0) {
-                console.log("MASZ UNLIKE");
+
             }
             else {
                 profile.likes.unshift({ user: req.user.id });
@@ -339,7 +339,7 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
 
             if (profile.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-                console.log("MASZ LAJKA")
+
             }
             else {
                 profile.unlikes.unshift({ user: req.user.id });

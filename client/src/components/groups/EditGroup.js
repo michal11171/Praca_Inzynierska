@@ -39,7 +39,7 @@ const EditGroup = ({
         if (group !== null) setData();
     }, [group]);
 
-    console.log(group);
+
 
     const { name, description, status } = formData;
 
